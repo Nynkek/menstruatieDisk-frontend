@@ -10,7 +10,7 @@ function Header({headerImage, pageTitle}) {
 
     const toLink = (e) => {
         e.preventDefault();
-        history.push("/doneren");
+        history("/doneren");
     }
 
     return (

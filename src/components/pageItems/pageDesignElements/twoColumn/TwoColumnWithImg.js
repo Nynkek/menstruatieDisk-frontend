@@ -1,8 +1,7 @@
 import React from 'react';
-import cupsOnRackImg
-    from "../../../../assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
+import "./twoColumnWithImg.css";
 
-function TwoColumn({children, img, imgAlt, imgCaption}) {
+function TwoColumnWithImg({children, img, imgAlt, imgCaption}) {
     return (
 
         <div className="page-two-section page-content">
@@ -19,4 +18,4 @@ function TwoColumn({children, img, imgAlt, imgCaption}) {
     );
 }
 
-export default TwoColumn;
+export default TwoColumnWithImg;

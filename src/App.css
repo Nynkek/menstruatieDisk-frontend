@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mulish:ital,wght@0,200;0,900;1,200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mulish:ital,wght@0,400;0,800;1,200&display=swap');
 
 :root {
   --yellow: #F4D846;
@@ -34,12 +34,12 @@ body {
 
 .page-title h1{
   font-size: 1.8em;
-  /*margin: 0.1em;*/
+  margin: 0.1em;
 }
 
 h1,h2,h3,h4,h5 {
   font-family: 'Fredoka One', cursive;
-  /*margin-top: 0.5em;*/
+  margin-top: 0.5em;
 }
 
 h2 {
@@ -63,6 +63,11 @@ body a {
 body a:hover {
   box-shadow: inset 0 -.5em 0 0 var(--bluegreen);
   /*font-weight: bolder;*/
+}
+
+strong {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
 }
 
 .footer-container a:hover:after{
@@ -262,29 +267,6 @@ header .logo {
 
 }
 
-.page-two-section {
-  display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
-  gap: 5%;
-}
-
-.page-two-section-img {
-  flex-basis: 30%;
-  padding-top: var(--margin);
-  padding-bottom: var(--margin);
-  text-align: center;
-  /*background-color: var(--pink);*/
-
-}
-
-.page-two-section img {
-  max-width: calc(100% - var(--margin));
-  max-height: calc(100% - var(--margin));
-  box-shadow: var(--dropshadow);
-  border: var(--border);
-}
-
 
 figcaption {
   margin-top: 0.5rem;
@@ -293,16 +275,6 @@ figcaption {
 
 figcaption::before {
   content: "↑ ";
-}
-
-.page-two-section-text {
-  flex-basis: 65%;
-}
-
-@media only screen and (max-width: 600px) {
-  .page-two-section {
-    flex-flow: column-reverse wrap;
-  }
 }
 
 .content-bigbox {
@@ -322,38 +294,6 @@ figcaption::before {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.bookmark-container {
-  background-color: var(--orange);
-  box-shadow: var(--dropshadow);
-  border: var(--border);
-  padding: 3em;
-  margin-top: var(--margin);
-  width: 100%;
-  position: relative;
-  left: -5%;
-  top: var(--minusTop);
-  border-radius: 0px 100px 100px 0px;
-  min-height: 10rem;
-  display: inline-block;
-}
-
-.bookmark-container .bookmark-vertical-text {
-  font-size: 1.4em;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  position: absolute;
-  top: 1rem;
-}
-
-.bookmark-container .bookmark-vertical-text h3 {
-  margin: 0;
-  transform-origin: 0 0;
-  transform: translateX(-0.5ch) rotate(90deg);
-}
-
-.bookmark-container .bookmark-content {
-
-}
 
 /*-----------FOOTER-----------*/
 

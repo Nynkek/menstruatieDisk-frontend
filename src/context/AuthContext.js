@@ -9,7 +9,7 @@ function AuthContextProvider({children}) {
 
     function login(e) {
         e.preventDefault();
-        history.push("/profiel");
+        history("/profiel");
         console.log("Gebruiker is ingelogd");
         toggleIsAuth(!isAuth);
     }
@@ -18,7 +18,7 @@ function AuthContextProvider({children}) {
         e.preventDefault();
         console.log("de gebruiker is uitgelogd");
         toggleIsAuth(!isAuth);
-        history.push('/');
+        history('/');
     }
 
     return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import './bookmarkBox.css';
 
 function BookmarkBox({children, verticalText}) {
     return (

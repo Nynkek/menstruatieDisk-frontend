@@ -1,0 +1,13 @@
+.columnCountContainer {
+    column-count: 2;
+}
+
+.columnCountContainer .one {
+    flex-basis: 50%;
+}
+
+@media only screen and (max-width: 800px) {
+    .columnCountContainer {
+        column-count: 1;
+    }
+}
