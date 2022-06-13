@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
@@ -8,10 +8,14 @@ import BookmarkBox from "../components/pageDesignElements/bookmarkBox/BookmarkBo
 import TwoColumn from "../components/pageDesignElements/twoColumn/TwoColumn";
 import cupsOnRackImg from "../assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
 
+
 function Contact({headerImageHandler, pageTitleHandler}) {
 
-    headerImageHandler(pageImg);
-    pageTitleHandler("Contact met Nynke, de maker achter menstruatiedisk.nl");
+    useEffect(() => {
+        headerImageHandler(pageImg);
+        pageTitleHandler("Contact met Nynke, de maker achter menstruatiedisk.nl");
+    } ,[]);
+
 
     return (
         <>

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import TextContainer from "../components/pageDesignElements/textContainer/TextContainer";
 
 function SignUp({headerImageHandler, pageTitleHandler}) {
 
-    headerImageHandler(pageImg);
-    pageTitleHandler("Registreren van een account");
+    useEffect(() => {
+        headerImageHandler(pageImg);
+        pageTitleHandler("Registreren van een account");
+    } ,[]);
 
     return (
         <>

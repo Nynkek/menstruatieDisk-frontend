@@ -25,10 +25,10 @@ function Nav() {
         <div className="nav-container">
         <nav>
             <ul className={getNavClass(location) + " nav-list"}>
-                <li><NavLink to="/" exact activeClassName="active-link">home</NavLink></li>
-                <li><NavLink to="/informatie-over-menstruatiedisks" activeClassName="active-link">info<span className="menu-icon">▼</span></NavLink></li>
-                <li><NavLink to="/vergelijk-meerdere-menstruatiedisks" activeClassName="active-link">vergelijken</NavLink></li>
-                <li><NavLink to="/contact" activeClassName="active-link">contact</NavLink></li>
+                <li><NavLink to="/" end className={(navData) => navData.isActive ? "active-link" : "" }>home</NavLink></li>
+                <li><NavLink to="/informatie-over-menstruatiedisks" className={(navData) => navData.isActive ? "active-link" : "" }>info<span className="menu-icon">▼</span></NavLink></li>
+                <li><NavLink to="/vergelijk-meerdere-menstruatiedisks" className={(navData) => navData.isActive ? "active-link" : "" }>vergelijken</NavLink></li>
+                <li><NavLink to="/contact" end className={(navData) => navData.isActive ? "active-link" : "" }>contact</NavLink></li>
             </ul>
 
         </nav>

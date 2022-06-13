@@ -3,8 +3,6 @@ import logo from '../../assets/menstruatiedisk-logo-rood.png'
 import {Link} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 
-
-
 function Footer() {
     const {auth} = useContext(AuthContext);
 

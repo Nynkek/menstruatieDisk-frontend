@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import {Link} from "react-router-dom";
 
 function Donate({headerImageHandler, pageTitleHandler}) {
-    headerImageHandler(pageImg);
-    pageTitleHandler("Doneren om deze website te onderhouden");
+    useEffect(() => {
+        headerImageHandler(pageImg);
+        pageTitleHandler("Doneren om deze website te onderhouden");
+    } ,[]);
 
     return (
         <section className="page-content">

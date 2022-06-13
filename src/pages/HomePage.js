@@ -24,8 +24,11 @@ function HomePage({headerImageHandler, pageTitleHandler}) {
         return newArray;
     }
 
-    headerImageHandler(pageImg);
-    pageTitleHandler("Menstruatiedisk homepage");
+    useEffect(() => {
+        headerImageHandler(pageImg);
+        pageTitleHandler("Menstruatiedisk homepage");
+    } ,[]);
+
 
     return (
 

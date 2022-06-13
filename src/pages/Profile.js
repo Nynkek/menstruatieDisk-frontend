@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import YellowContentBox from "../components/pageDesignElements/yellowContentBox/YellowContentBox";
@@ -6,8 +6,11 @@ import TextContainer from "../components/pageDesignElements/textContainer/TextCo
 
 function Profile({headerImageHandler, pageTitleHandler}) {
 
-    headerImageHandler(pageImg);
-    pageTitleHandler("Profielpagina");
+
+    useEffect(() => {
+        headerImageHandler(pageImg);
+        pageTitleHandler("Profielpagina");
+    } ,[]);
 
     return (
         <>

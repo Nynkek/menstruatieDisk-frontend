@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {AuthContext} from "../context/AuthContext";
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
@@ -8,9 +8,10 @@ import YellowContentBox from "../components/pageDesignElements/yellowContentBox/
 function SignIn({headerImageHandler, pageTitleHandler}) {
     const {login, logout, auth} = useContext(AuthContext);
 
-    headerImageHandler(pageImg);
-    pageTitleHandler("Inloggen");
-
+    useEffect(() => {
+        headerImageHandler(pageImg);
+        pageTitleHandler("Inloggen");
+    } ,[]);
 
     return (
         <>
