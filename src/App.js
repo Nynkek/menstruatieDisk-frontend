@@ -12,9 +12,9 @@ import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Donate from "./pages/Donate";
-import Header from "./components/header/Header";
-import PrivateRoute from "./components/privateRoute/PrivateRoute";
-import Footer from "./components/footer/Footer";
+import Header from "./components/pageItems/header/Header";
+import PrivateRoute from "./components/pageItems/privateRoute/PrivateRoute";
+import Footer from "./components/pageItems/footer/Footer";
 
 
 function App() {

@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
-import TextContainer from "../components/pageDesignElements/textContainer/TextContainer";
-import YellowContentBox from "../components/pageDesignElements/yellowContentBox/YellowContentBox";
-import BookmarkBox from "../components/pageDesignElements/bookmarkBox/BookmarkBox";
-import TwoColumn from "../components/pageDesignElements/twoColumn/TwoColumn";
+import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
+import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
+import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
+import TwoColumn from "../components/pageItems/pageDesignElements/twoColumn/TwoColumn";
 import cupsOnRackImg from "../assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
 
 
