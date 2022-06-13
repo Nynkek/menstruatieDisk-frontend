@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import pageImg from '../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg'
-import YellowContentBox from "../components/YellowContentBox";
+import YellowContentBox from "../components/pageDesignElements/yellowContentBox/YellowContentBox";
 
 
 function Compare({headerImageHandler, pageTitleHandler}) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import cupsOnRackImg
-    from "../../../menstruatiedisk-frontend/src/assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
+    from "../../../assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
 
 function TwoColumn({children, img, imgAlt, imgCaption}) {
     return (

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
 
-
 function HomePage({headerImageHandler, pageTitleHandler}) {
 
     const [menstrualDisks, setMenstrualDisks] = useState([]);

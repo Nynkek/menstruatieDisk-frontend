@@ -1,12 +1,12 @@
 import React from 'react';
-import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
-import TextContainer from "../components/TextContainer";
 import {Link} from "react-router-dom";
-import YellowContentBox from "../components/YellowContentBox";
-import BookmarkBox from "../components/BookmarkBox";
-import TwoColumn from "../components/TwoColumn";
-import cupsOnRackImg
-    from "../../../menstruatiedisk-frontend/src/assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
+
+import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
+import TextContainer from "../components/pageDesignElements/textContainer/TextContainer";
+import YellowContentBox from "../components/pageDesignElements/yellowContentBox/YellowContentBox";
+import BookmarkBox from "../components/pageDesignElements/bookmarkBox/BookmarkBox";
+import TwoColumn from "../components/pageDesignElements/twoColumn/TwoColumn";
+import cupsOnRackImg from "../assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
 
 function Contact({headerImageHandler, pageTitleHandler}) {
 

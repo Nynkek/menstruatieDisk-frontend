@@ -1,12 +1,12 @@
 import React from 'react';
-import logo from '../../../menstruatiedisk-frontend/src/assets/menstruatiedisk-logo-rood.png';
-import Nav from "./Nav";
-import HeaderImage from "./HeaderImage";
-import {useHistory, Link} from 'react-router-dom';
+import logo from '../../assets/menstruatiedisk-logo-rood.png';
+import Nav from "./nav/Nav";
+import HeaderImage from "./headerImage/HeaderImage";
+import {useNavigate, Link} from 'react-router-dom';
 
 
 function Header({headerImage, pageTitle}) {
-    const history = useHistory();
+    const history = useNavigate();
 
     const toLink = (e) => {
         e.preventDefault();

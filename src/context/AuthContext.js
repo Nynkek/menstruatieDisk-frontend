@@ -1,13 +1,11 @@
 import React, {createContext, useState} from "react";
-import {useHistory, Link} from 'react-router-dom';
-
+import {useNavigate} from 'react-router-dom';
 
 export const AuthContext = createContext(null);
 
 function AuthContextProvider({children}) {
     const [isAuth, toggleIsAuth] = useState(false);
-    let history = useHistory();
-
+    let history = useNavigate();
 
     function login(e) {
         e.preventDefault();
@@ -33,10 +31,7 @@ function AuthContextProvider({children}) {
         }>
             {children}
         </AuthContext.Provider>
-
-
     );
-
 }
 
 export default AuthContextProvider;
