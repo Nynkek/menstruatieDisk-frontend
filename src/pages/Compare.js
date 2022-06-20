@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import pageImg from '../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg'
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
 import axios from "axios";
+import Tabel from "./Tabel";
 
 
 function Compare({headerImageHandler, pageTitleHandler}) {
@@ -54,7 +55,7 @@ function Compare({headerImageHandler, pageTitleHandler}) {
                 </p>
                 {showDisks(menstrualDiscs)}
                 <p>test</p>
-
+<Tabel/>
             </div>
         </>
     );
