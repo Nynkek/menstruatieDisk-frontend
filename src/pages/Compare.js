@@ -5,12 +5,12 @@ import axios from "axios";
 
 
 function Compare({headerImageHandler, pageTitleHandler}) {
-    const [menstrualDisks, setMenstrualDisks] = useState([]);
+    const [menstrualDiscs, setMenstrualDiscs] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080")
+        axios.get("http://localhost:8080/discs/")
             .then((response) => {
-                setMenstrualDisks(response.data);
+                setMenstrualDiscs(response.data);
                 console.log(response.data);
             }).catch(error => {
             console.error('There was an error!', error);
@@ -52,6 +52,9 @@ function Compare({headerImageHandler, pageTitleHandler}) {
                 <h3>Hoe kies je een menstruatiedisk?</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
+                {showDisks(menstrualDiscs)}
+                <p>test</p>
+
             </div>
         </>
     );
