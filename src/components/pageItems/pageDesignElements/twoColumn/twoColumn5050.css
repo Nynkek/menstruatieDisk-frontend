@@ -1,8 +1,12 @@
 .columnCountContainer {
     column-count: 2;
 }
-
-.columnCountContainer .one {
+.columnContainer {
+    display: flex;
+    align-items: flex-start;
+    gap: 2em;
+}
+.one {
     flex-basis: 50%;
 }
 
