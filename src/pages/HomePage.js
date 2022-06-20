@@ -4,6 +4,8 @@ import pageImg
     from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
 import TwoColumn5050 from "../components/pageItems/pageDesignElements/twoColumn/twoColumn50-50";
+import TwoColumn from "../components/pageItems/pageDesignElements/twoColumn/TwoColumn";
+import Column from "../components/pageItems/pageDesignElements/twoColumn/Column";
 import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
 
 function HomePage({headerImageHandler, pageTitleHandler}) {
@@ -40,28 +42,30 @@ function HomePage({headerImageHandler, pageTitleHandler}) {
             <TextContainer>
                 <h2>Wat is een menstruatiedisk?</h2>
             </TextContainer>
-            <TwoColumn5050>
+            <TwoColumn>
+                <Column>
+                    <p>Een menstruatiedisk is een menstruatieproduct. Het is <strong>een platte disk, die je menstruatie
+                        opvangt. </strong>
+                        Disks zijn (meestal) van medisch goedgekeurd siliconen gemaakt en gaan tot 10 jaar mee!</p>
 
-                <p>Een menstruatiedisk is een menstruatieproduct. Het is <strong>een platte disk, die je menstruatie
-                    opvangt. </strong>
-                    Disks zijn (meestal) van medisch goedgekeurd siliconen gemaakt en gaan tot 10 jaar mee!</p>
+                    <h3>Verschil tussen tampons/maandverband en een disk</h3>
+                    <p>Tampons en maandverband <strong>absorberen</strong> je menstruatie, maar een disk vangt het alleen
+                        op. </p>
+                    <p>Je kun een disk tot <strong>12 uur lang dragen</strong>. Daarna haal je de disk eruit, door met je vinger achter de
+                        rand te haken (of met het lusje als je disk die heeft), leegt de disk en spoelt hem af. Daarna breng je hem weer terug
+                        in. Voor nog 12 uur zorgeloze menstruatie.</p>
+                </Column>
+                <Column>
+                    <h3>Kan iedereen een disk 12 uur dragen?</h3>
+                    <p>Nee, het ligt aan de heftigheid van je menstruatie. Als de disk eerder dan 12 uur vol is, zul je hem
+                        eerder moeten legen. Maar een disk vangt veel menstruatie op! 30 tot 70ml! Ter vergelijking: een
+                        regular tampon heeft een opvangvermogen van 8-10 ml.</p>
 
-                <h3>Verschil tussen tampons/maandverband en een disk</h3>
-                <p>Tampons en maandverband <strong>absorberen</strong> je menstruatie, maar een disk vangt het alleen
-                    op. </p>
-                <p>Je kun een disk tot <strong>12 uur lang dragen</strong>. Daarna haal je de disk eruit, door met je vinger achter de
-                    rand te haken (of met het lusje als je disk die heeft), leegt de disk en spoelt hem af. Daarna breng je hem weer terug
-                    in. Voor nog 12 uur zorgeloze menstruatie.</p>
-
-                <h3>Kan iedereen een disk 12 uur dragen?</h3>
-                <p>Nee, het ligt aan de heftigheid van je menstruatie. Als de disk eerder dan 12 uur vol is, zul je hem
-                    eerder moeten legen. Maar een disk vangt veel menstruatie op! 30 tot 70ml! Ter vergelijking: een
-                    regular tampon heeft een opvangvermogen van 8-10 ml.</p>
-
-                <h3>Disk uitkoken</h3>
-                <p>Na of voor je menstruatie is het aan te raden om je disk even uit te koken door hem in een
-                    pannetje/mok/bakje met kokend heet water te leggen.</p>
-            </TwoColumn5050>
+                    <h3>Disk uitkoken</h3>
+                    <p>Na of voor je menstruatie is het aan te raden om je disk even uit te koken door hem in een
+                        pannetje/mok/bakje met kokend heet water te leggen.</p>
+                </Column>
+            </TwoColumn>
             <BookmarkBox verticalText="gebruik">
                 <h2>Hoe gebruik je een disk?</h2>
                 <ul>

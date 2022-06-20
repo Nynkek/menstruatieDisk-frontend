@@ -1,14 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import pageImg from '../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg'
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
+import axios from "axios";
 
 
 function Compare({headerImageHandler, pageTitleHandler}) {
+    const [menstrualDisks, setMenstrualDisks] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080")
+            .then((response) => {
+                setMenstrualDisks(response.data);
+                console.log(response.data);
+            }).catch(error => {
+            console.error('There was an error!', error);
+        });
+
+    }, []);
+
+    function showDisks(array) {
+        let newArray = array.map(({id, name, brand}) => {
+            return <li key={id}>{brand} {name}</li>;
+        });
+        return newArray;
+    }
 
     useEffect(() => {
         headerImageHandler(pageImg);
         pageTitleHandler("Vergelijken");
     } ,[]);
+
+
     return (
         <>
 
