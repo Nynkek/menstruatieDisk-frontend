@@ -1,0 +1,42 @@
+.dt_Table{
+    background-color: var(--yellow);
+}
+.rdt_TableRow{
+    background-color: var(--yellow);
+}
+.rdt_TableCol{
+    background-color: var(--yellow);
+}
+.rdt_TableCol_Sortable{
+    background-color: var(--bluegreen);
+    text-align: center;
+}
+.rdt_TableCell{
+    background-color: var(--yellow);
+    margin: 1px;
+}
+.rdt_TableHeader{
+    /*background-color: red;*/
+}
+.rdt_TableFooter{
+    /*background-color: red;*/
+}
+.rdt_TableHead{
+    /*background-color: red;*/
+}
+.rdt_TableHeadRow{
+    /*background-color: red;*/
+}
+.rdt_TableBody{
+    /*background-color: red;*/
+}
+.rdt_ExpanderRow{
+    /*background-color: red;*/
+}
+
+.discsTabel {
+    width: 110%;
+    left: -5%;
+    /*max-width: 100ch;*/
+    position: relative;
+}
