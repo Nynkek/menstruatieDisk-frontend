@@ -27,7 +27,7 @@ function Footer() {
                     </p>
                     ♥ <p>Deze website was het eindproject van Nynke. <br/>Vind je het project tof,
                     de website lekker werken en het design cool en je op zoek naar een full stack developer:
-                    neem contact op!</p>
+                    neem contact op! ◕‿◕</p>
                 </div>
                 <div className="footer-logo">
                     <img src={logo} alt="menstruatiedisk.nl logo" className="logo"/>

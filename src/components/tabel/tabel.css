@@ -1,0 +1,66 @@
+.dt_Table{
+    background-color: var(--yellow);
+}
+.rdt_TableRow{
+    background-color: var(--red);
+}
+.rdt_TableCol{
+    background-color: var(--pink);
+}
+.rdt_TableCol_Sortable{
+    background-color: var(--pink);
+    text-align: center;
+}
+.rdt_TableCell{
+    background-color: var(--yellow);
+
+}
+.rdt_TableHeader{
+    /*background-color: red;*/
+}
+.rdt_TableFooter{
+    /*background-color: red;*/
+}
+.rdt_TableHead{
+    /*background-color: red;*/
+}
+.rdt_TableHeadRow{
+    /*background-color: red;*/
+}
+.rdt_TableBody{
+    /*background-color: red;*/
+}
+.rdt_ExpanderRow{
+    /*background-color: red;*/
+}
+
+.discsTabel {
+    width: 110%;
+    left: -5%;
+    position: relative;
+}
+
+label {
+    margin-left: 1ch;
+    line-height: 1.5rem;
+}
+label:hover {
+  font-weight: bolder;
+}
+
+input[type="radio"]:checked {
+    font-weight: bolder;
+}
+
+:checked {
+    color: red;
+    border: 1px solid blue;
+}
+
+input {
+    padding: 10px;
+    width: 3ch;
+}
+
+input[type="radio"] {
+}

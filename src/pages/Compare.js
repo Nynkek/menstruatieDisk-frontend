@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import pageImg from '../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg'
+import pageImg
+    from '../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg'
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
 import axios from "axios";
+import Tabel from "./Tabel";
+import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
+import TwoColumn5050 from "../components/pageItems/pageDesignElements/twoColumn/twoColumn50-50";
+import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
 
 
 function Compare({headerImageHandler, pageTitleHandler}) {
@@ -18,6 +23,9 @@ function Compare({headerImageHandler, pageTitleHandler}) {
 
     }, []);
 
+    const sizes = menstrualDiscs.length; // misschien map?
+
+
     function showDisks(array) {
         let newArray = array.map(({id, name, brand}) => {
             return <li key={id}>{brand} {name}</li>;
@@ -28,7 +36,7 @@ function Compare({headerImageHandler, pageTitleHandler}) {
     useEffect(() => {
         headerImageHandler(pageImg);
         pageTitleHandler("Vergelijken");
-    } ,[]);
+    }, []);
 
 
     return (
@@ -45,17 +53,42 @@ function Compare({headerImageHandler, pageTitleHandler}) {
             <YellowContentBox>
                 <h2>Vergelijk alle menstruatiedisks</h2>
                 <p>Onder de tabel vind je de legenda. De tabel is het best zichtbaar op een breed scherm.</p>
-                <h2>Legenda</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias consequuntur, cum eos iste laborum magnam maxime natus nemo nihil obcaecati officia praesentium qui reprehenderit, repudiandae sed tempore voluptas? A ad aut autem blanditiis culpa, dignissimos ea eligendi facere hic magnam neque placeat quisquam rem repellendus, soluta temporibus tenetur veritatis!</p>
+
+
+
+                <Tabel/>
             </YellowContentBox>
-            <div className="page-content">
+            <TextContainer>
                 <h3>Hoe kies je een menstruatiedisk?</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae molestie
+                    tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget consequat
+                    diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales nibh, vitae
+                    molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum nulla, eget
+                    consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales
+                    nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel rutrum
+                    nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies
+                    sodales nibh, vitae molestie tellus ultrices eget. Maecenas et nunc eu est mattis ultrices. Duis vel
+                    rutrum nulla, eget consequat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
                 {showDisks(menstrualDiscs)}
-                <p>test</p>
+            </TextContainer>
+            <BookmarkBox verticalText="legenda">
+                <h2>Uitleg menstruatiedisk-tabel</h2>
+                <p>Lengte: De lengte van de cup. Dit is exclusief de steel. (Die je er af kan knippen). Meer info.<br/>
+                    Inhoud: Hoeveel ml er in de cup kan, tot de luchtgaten gemeten. Voller kan hij ook niet zonder te
+                    lekken. Meer info.<br/>
+                    Diameter: Is het breedste gedeelte van de cup. Meer info.<br/>
+                    Hardheid: In drie gradaties (soft, regular, hard). Meer info.<br/>
+                    Materiaal: Cups zijn van Siliconen, TPE of rubber. Meer info.<br/><br/>
 
-            </div>
+                    Dat een cup opgenomen is in deze tabel betekent niet dat wij de cup aanraden. Lees hier meer over
+                    cups en veiligheid.</p>
+            </BookmarkBox>
+
+            <TwoColumn5050>
+                <p>f</p>
+            </TwoColumn5050>
+
         </>
     );
 }

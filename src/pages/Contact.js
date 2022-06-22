@@ -7,6 +7,8 @@ import YellowContentBox from "../components/pageItems/pageDesignElements/yellowC
 import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
 import TwoColumnWithImg from "../components/pageItems/pageDesignElements/twoColumn/TwoColumnWithImg";
 import cupsOnRackImg from "../assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
+import TwoColumn from "../components/pageItems/pageDesignElements/twoColumn/TwoColumn";
+import Column from "../components/pageItems/pageDesignElements/twoColumn/Column";
 
 
 function Contact({headerImageHandler, pageTitleHandler}) {
@@ -41,7 +43,31 @@ function Contact({headerImageHandler, pageTitleHandler}) {
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur aut beatae debitis dolor, est eum eveniet excepturi, expedita explicabo, in iusto laudantium nihil officia officiis omnis quasi qui ratione rem repellendus unde vero voluptatibus voluptatum. Ducimus enim error, ex exercitationem in inventore natus nihil odit praesentium reprehenderit, saepe sint sunt voluptatibus! Accusantium consequuntur doloribus est expedita hic laudantium magnam molestias odio qui, quisquam rem sit tenetur ut voluptatibus?</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur aut beatae debitis dolor, est eum eveniet excepturi, expedita explicabo, in iusto laudantium nihil officia officiis omnis quasi qui ratione rem repellendus unde vero voluptatibus voluptatum. Ducimus enim error, ex exercitationem in inventore natus nihil odit praesentium reprehenderit, saepe sint sunt voluptatibus! Accusantium consequuntur doloribus est expedita hic laudantium magnam molestias odio qui, quisquam rem sit tenetur ut voluptatibus?</p>
             </BookmarkBox>
+            <TwoColumn>
+                <Column>
+                    <p>TwoColumn</p>
+                    <p>Een menstruatiedisk is een menstruatieproduct. Het is <strong>een platte disk, die je menstruatie
+                        opvangt. </strong>
+                        Disks zijn (meestal) van medisch goedgekeurd siliconen gemaakt en gaan tot 10 jaar mee!</p>
 
+                    <h3>Verschil tussen tampons/maandverband en een disk</h3>
+                    <p>Tampons en maandverband <strong>absorberen</strong> je menstruatie, maar een disk vangt het alleen
+                        op. </p>
+                    <p>Je kun een disk tot <strong>12 uur lang dragen</strong>. Daarna haal je de disk eruit, door met je vinger achter de
+                        rand te haken (of met het lusje als je disk die heeft), leegt de disk en spoelt hem af. Daarna breng je hem weer terug
+                        in. Voor nog 12 uur zorgeloze menstruatie.</p>
+                </Column>
+                <Column>
+                    <h3>Kan iedereen een disk 12 uur dragen?</h3>
+                    <p>Nee, het ligt aan de heftigheid van je menstruatie. Als de disk eerder dan 12 uur vol is, zul je hem
+                        eerder moeten legen. Maar een disk vangt veel menstruatie op! 30 tot 70ml! Ter vergelijking: een
+                        regular tampon heeft een opvangvermogen van 8-10 ml.</p>
+
+                    <h3>Disk uitkoken</h3>
+                    <p>Na of voor je menstruatie is het aan te raden om je disk even uit te koken door hem in een
+                        pannetje/mok/bakje met kokend heet water te leggen.</p>
+                </Column>
+            </TwoColumn>
         </>
     );
 }
