@@ -18,7 +18,7 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
 
             <YellowContentBox>
                 <form>
-                    <p>*invoervelden*</p>
+                   <input />
                     {auth === false ?
                         <button type="button"
                                 onClick={login}
