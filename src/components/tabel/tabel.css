@@ -40,27 +40,41 @@
     position: relative;
 }
 
+
 label {
     margin-left: 1ch;
     line-height: 1.5rem;
 }
-label:hover {
-  font-weight: bolder;
-}
 
-input[type="radio"]:checked {
+.tabel label:hover {
     font-weight: bolder;
 }
 
-:checked {
-    color: red;
-    border: 1px solid blue;
+.tabel input {
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--black);
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
 }
 
-input {
-    padding: 10px;
-    width: 3ch;
+.tabel input:checked {
+    border: 6px solid var(--black);
+    background-color: var(--pink);
 }
 
-input[type="radio"] {
+.legend {
+    color: var(--black);
+    background-color: var(--orange);
+    padding: 5px 10px;
+    border-radius: 0;
+    border: 0;
+}
+
+.reset-btn {
+    background-color: var(--red);
 }

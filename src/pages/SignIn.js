@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {AuthContext} from "../context/AuthContext";
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
+import { useForm } from 'react-hook-form';
 
 
 function SignIn({headerImageHandler, pageTitleHandler}) {
