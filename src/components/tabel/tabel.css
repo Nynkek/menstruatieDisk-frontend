@@ -2,18 +2,18 @@
     background-color: var(--yellow);
 }
 .rdt_TableRow{
-    background-color: var(--yellow);
+    background-color: var(--red);
 }
 .rdt_TableCol{
-    background-color: var(--yellow);
+    background-color: var(--pink);
 }
 .rdt_TableCol_Sortable{
-    background-color: var(--bluegreen);
+    background-color: var(--pink);
     text-align: center;
 }
 .rdt_TableCell{
     background-color: var(--yellow);
-    margin: 1px;
+
 }
 .rdt_TableHeader{
     /*background-color: red;*/
@@ -37,6 +37,30 @@
 .discsTabel {
     width: 110%;
     left: -5%;
-    /*max-width: 100ch;*/
     position: relative;
+}
+
+label {
+    margin-left: 1ch;
+    line-height: 1.5rem;
+}
+label:hover {
+  font-weight: bolder;
+}
+
+input[type="radio"]:checked {
+    font-weight: bolder;
+}
+
+:checked {
+    color: red;
+    border: 1px solid blue;
+}
+
+input {
+    padding: 10px;
+    width: 3ch;
+}
+
+input[type="radio"] {
 }
