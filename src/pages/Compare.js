@@ -85,9 +85,6 @@ function Compare({headerImageHandler, pageTitleHandler}) {
                     cups en veiligheid.</p>
             </BookmarkBox>
 
-            <TwoColumn5050>
-                <p>f</p>
-            </TwoColumn5050>
 
         </>
     );
