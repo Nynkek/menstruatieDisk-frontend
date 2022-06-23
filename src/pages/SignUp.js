@@ -25,16 +25,16 @@ function SignUp({headerImageHandler, pageTitleHandler}) {
         setName(e.username);
         setPassword(e.password);
         setEmail(e.emailAdress);
-        console.log(e.username, e.password, e.emailAdress);
+        console.log(e.username, e.emailAdress, e.password);
         try {
             const response = await axios.post("http://localhost:8080/users/createUser/", {
                 username: name,
                 password: password,
-                emailAdress: email
+                emailAdress: email,
             },);
             console.log(response.data);
             toggleAddSuccess(true);
-            navigate("/inloggen");
+            // navigate("/inloggen");
         } catch (error) {
             console.error('There was an error!', error);
         };
