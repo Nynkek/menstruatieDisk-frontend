@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, Navigate, Redirect, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import pageImg
     from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";

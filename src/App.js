@@ -15,6 +15,7 @@ import Donate from "./pages/Donate";
 import Header from "./components/pageItems/header/Header";
 import PrivateRoute from "./components/pageItems/privateRoute/PrivateRoute";
 import Footer from "./components/pageItems/footer/Footer";
+import AddDisc from "./pages/AddDisc";
 
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
 
                 <Route path="/doneren"
                        element={<Donate headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
+
+                <Route path="/disc-toevoegen"
+                        element={<AddDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
             </Routes>
             <Footer/>
         </div>
