@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import "./form.css";
@@ -48,7 +47,7 @@ function DiscAddForm() {
         setDesignFeature(e.designFeatureForm);
         setShape(e.shapeForm);
         setFirmness(e.firmnessForm);
-        setLinkToStore(e.linkToReviewForm);
+        setLinkToReview(e.linkToReviewForm);
         setLinkToStore(e.linkToStoreForm);
         setImage(e.imageForm[0]);
         toggleIsAvailableInNL(e.isAvailableInNLForm);
@@ -104,112 +103,126 @@ function DiscAddForm() {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <label htmlFor="details-name">
-                    Naam:<br/>
+                    Naam:
                     <input type="text"
                            placeholder="Hoe noemen jullie je disks?"
                            id="details-name"
                            {...register("nameForm", {maxLength: 80})} />
                 </label>
+                {errors.nameForm && <p>{errors.nameForm.message}</p>}
                 <label htmlFor="details-brand">Merk
                     <input type="text" placeholder="Merknaam"
                            id="details-brand"
                            {...register("brandForm", {
-                               required: true,
+                               required: "Veld mag niet leeg zijn.",
                                maxLength: 100
                            })} />
                 </label>
+                {errors.brandForm && <p>{errors.brandForm.message}</p>}
                 <label htmlFor="details-model">Model
                     <input type="text"
                            placeholder="bijv M, S, of OS (one size)"
                            id="details-model"
-                           {...register("modelForm", {required: true})} />
+                           {...register("modelForm", {required: "Veld mag niet leeg zijn."})} />
                 </label>
+                {errors.modelForm && <p>{errors.modelForm.message}</p>}
                 <label htmlFor="details-width">Breedte
                     <input type="number" placeholder="Breedte (in mm)"
                            id="details-width"
                            {...register("widthForm", {
-                               required: true,
+                               required: "Veld mag niet leeg zijn.",
                                max: 100,
                                min: 0,
                                maxLength: 3
                            })} />
                 </label>
+                {errors.widthForm && <p>{errors.widthForm.message}</p>}
                 <label htmlFor="details-capacity">Inhoud (in ml)
                     <input type="number" placeholder="Inhoud (ml)"
                            id="details-capacity"
                            {...register("capacityForm", {
-                               required: true,
+                               required: "Veld mag niet leeg zijn.",
                                max: 100,
                                min: 0,
                                maxLength: 3
                            })} />
                 </label>
+                {errors.capacityForm && <p>{errors.capacityForm.message}</p>}
                 <label htmlFor="details-rimWidth">Randdikte (mm)
                     <input type="number" placeholder="Randdikte (mm)"
                            id="details-rimWidth"
                            {...register("rimWidthForm", {
-                               required: true,
+                               required: "Veld mag niet leeg zijn.",
                                max: 100,
                                min: 0,
                                maxLength: 2
                            })} />
                 </label>
+                {errors.rimWidthForm && <p>{errors.rimWidthForm.message}</p>}
                 <label htmlFor="details-isReusable" className="checkbox">
                     <input type="checkbox" placeholder="is herbruikbaar"
                            id="details-isReusable"
                            {...register("isReusableForm", {})} />
                     <span className="checkmark"></span>Is herbruikbaar?
                 </label>
+                {errors.isReusableForm && <p>{errors.isReusableForm.message}</p>}
                 <label htmlFor="details-designFeature">Opvallende design-keuzes?
                     <textarea
                         id="details-designFeature"
                         {...register("designFeatureForm", {
-                            required: true,
+                            required: "Veld mag niet leeg zijn.",
                             maxLength: 80
                         })} />
                 </label>
+                {errors.designFeatureForm && <p>{errors.designFeatureForm.message}</p>}
                 <label htmlFor="details-hasStem" className="checkbox">
                     <input type="checkbox"
                            placeholder="heeft steeltje/lusje/touwtje"
                            id="details-hasStem"
-                           {...register("hasStemForm", {required: true})} />
+                           {...register("hasStemForm", {required: "Veld mag niet leeg zijn."})} />
                     <span className="checkmark"></span>Heeft een steeltje/lusje/touwtje?
                 </label>
+                {errors.hasStemForm && <p>{errors.hasStemForm.message}</p>}
                 <label htmlFor="details-shape">Vorm
                     <input type="text" placeholder="Vorm (rond, ovaal?)"
                            id="detailsshape"
                            {...register("shapeForm", {
-                               required: true,
+                               required: "Veld mag niet leeg zijn.",
                                maxLength: 80
                            })} />
                 </label>
+                {errors.shapeForm && <p>{errors.shapeForm.message}</p>}
                 <label htmlFor="details-firmness">Hardheid
                     <select
                         id="details-firmness"
                         {...register("firmnessForm",
-                            {required: true})}>
+                            {required: "Veld mag niet leeg zijn."})}>
                         <option value="zacht">zacht</option>
                         <option value="medium">medium</option>
                         <option value="hard">hard</option>
                     </select>
                 </label>
+                {errors.firmnessForm && <p>{errors.firmnessForm.message}</p>}
                 <label htmlFor="details-linkToStore">Link naar (web)winkel
                     <input type="url"
                            placeholder="Link naar webwinkel"
                            id="details-linkToStore"
                            {...register("linkToStoreForm", {maxLength: 800})} />
                 </label>
+                {errors.nameForm && <p>{errors.nameForm.message}</p>}
                 <label htmlFor="details-linkToReview">Link naar een review
                     <input type="url"
                            placeholder="Link naar een review"
                            id="details-linkToReview"
                            {...register("linkToReviewForm", {maxLength: 800})} />
                 </label>
+                {errors.linkToReviewForm && <p>{errors.linkToReviewForm.message}</p>}
                 <label htmlFor="details-image">Afbeelding URL
                     <input type="file" placeholder="Afbeelding"
                            id="details-image"
                            {...register("imageForm", {})} />
                 </label>
+                {errors.imageForm && <p>{errors.imageForm.message}</p>}
                 <label htmlFor="details-isAvailableInNL" className="checkbox">
                     <input type="checkbox"
                            placeholder="is in een Nederlandse (web)winkel te koop?"
@@ -217,26 +230,30 @@ function DiscAddForm() {
                            {...register("isAvailableInNLForm", {})} />
                     <span className="checkmark"></span> Is in NL te koop.
                 </label>
+                {errors.isAvailableInNLForm && <p>{errors.isAvailableInNLForm.message}</p>}
                 <label htmlFor="details-material">Gemaakt van?
                     <select
                         id="details-material"
-                        {...register("materialForm", {required: true})}>
+                        {...register("materialForm", {required: "Veld mag niet leeg zijn."})}>
                         <option value="polymer">polymer</option>
                         <option value=" silicone">silicone</option>
                         <option value="anders">anders</option>
                     </select>
                 </label>
+                {errors.materialForm && <p>{errors.materialForm.message}</p>}
                 <label htmlFor="details-createdDate">Verstuurd op
                     <input type="datetime-local" placeholder="Datum"
                            id="details-createdDate"
                            {...register("createdDateForm", {})} />
                 </label>
+                {errors.createdDateForm && <p>{errors.createdDateForm.message}</p>}
                 <label htmlFor="details-username">Wie?
                     <input type="text"
                            placeholder="Wie verstuurt dit formulier?"
                            id="details-username"
                            {...register("usernameForm", {})} />
                 </label>
+                {errors.usernameForm && <p>{errors.usernameForm.message}</p>}
                 <button type="submit">Verstuur disk-gegevens</button>
             </form>
             {addSuccess === true && <p>Disc is verstuurd ter goedkeuring! Je mag de pagina sluiten.</p>}
