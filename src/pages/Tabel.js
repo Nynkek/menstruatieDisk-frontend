@@ -165,7 +165,7 @@ function Tabel() {
     }
 
     return (
-        <>
+        <div className="tabel">
             <h4 className="legend">Baarmoedermondhoogte (bepaalt de breedte van de disk)</h4>
             <form>
                 <label>
@@ -223,7 +223,7 @@ function Tabel() {
                     noDataComponent="Met deze specificaties zijn er geen disks gevonden. Probeer eens een ander antwoord te geven."
                 />
             </div>
-        </>
+        </div>
     );
 }
 

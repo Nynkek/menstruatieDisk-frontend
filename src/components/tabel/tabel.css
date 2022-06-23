@@ -19,23 +19,22 @@
 }
 
 .discsTabel {
-    width: 110%;
-    left: -5%;
+    width: 108%;
+    left: -4%;
     position: relative;
 }
+
 
 label {
     margin-left: 1ch;
     line-height: 1.5rem;
 }
 
-label:hover {
+.tabel label:hover {
     font-weight: bolder;
 }
 
-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
+.tabel input {
     appearance: none;
     border-radius: 50%;
     width: 16px;
@@ -47,7 +46,7 @@ input {
     top: 4px;
 }
 
-input:checked {
+.tabel input:checked {
     border: 6px solid var(--black);
     background-color: var(--pink);
 }

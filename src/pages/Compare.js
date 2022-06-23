@@ -53,9 +53,6 @@ function Compare({headerImageHandler, pageTitleHandler}) {
             <YellowContentBox>
                 <h2>Vergelijk alle menstruatiedisks</h2>
                 <p>Onder de tabel vind je de legenda. De tabel is het best zichtbaar op een breed scherm.</p>
-
-
-
                 <Tabel/>
             </YellowContentBox>
             <TextContainer>
