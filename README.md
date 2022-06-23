@@ -1,4 +1,4 @@
-# MenstruatieDisk app
+# Menstruatiedisk app
 
 
 onderdeel van het project menstruatieDisk.
