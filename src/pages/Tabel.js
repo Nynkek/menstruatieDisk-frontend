@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import DataTable from 'react-data-table-component';
 import axios from "axios";
 import "../components/tabel/tabel.css";
-import FilterComponent from "../components/tabel/FilterComponent";
 
 function Tabel() {
     const [menstrualDiscs, setMenstrualDiscs] = useState([]);
@@ -32,17 +31,16 @@ function Tabel() {
             selector: row => row.image,
             sortable: true,
             compact: true,
+            width: "80px",
             cell: row => <img height="53px" width="83px" alt={row.name} src={row.image}/>,
-            width: "83px",
 
         },
         {
             name: 'Name',
             selector: row => row.name,
             sortable: true,
-            compact: true,
+            compact: false,
             wrap: true,
-            width: "110px",
             cell: (row) => <a href={row.linkToStore} target="_blank"
                               rel="noopener noreferrer">{row.name} {row.model}</a>,
         },
@@ -52,16 +50,15 @@ function Tabel() {
             selector: row => row.width + "mm",
             sortable: true,
             compact: true,
-            width: "60px",
-            center: true,
+            maxWidth: "50px",
         },
         {
             name: 'Inhoud',
             selector: row => row.capacity + "ml",
             sortable: true,
             compact: true,
-            width: "60px",
-            center: true,
+            maxWidth: "50px",
+
         },
 
         {
@@ -69,34 +66,34 @@ function Tabel() {
             selector: row => row.firmness.toLowerCase(),
             sortable: true,
             compact: true,
-            width: "70px",
-            hide: "md"
+            hide: "md",
+            maxWidth: "50px",
         },
         {
             name: 'Materiaal',
             selector: row => row.material.toLowerCase(),
             sortable: true,
             compact: true,
-            width: "70px",
-            hide: "md"
+            hide: "md",
+            maxWidth: "50px",
+
         },
         {
             name: 'Vorm',
             selector: row => row.shape.toLowerCase(),
             sortable: true,
             compact: true,
-            width: "60px",
-            hide: "md"
-
+            hide: "md",
+            maxWidth: "50px",
         },
         {
             name: 'Merk',
             selector: row => row.brand,
             sortable: true,
             compact: true,
-            width: "12ch",
-            hide: "md"
-
+            hide: "md",
+            maxWidth: "50px",
+            wrap: true,
         },
         {
             name: 'Design',
@@ -104,7 +101,6 @@ function Tabel() {
             sortable: true,
             compact: true,
             wrap: true,
-            // width: "12ch",
         },
 
     ];
@@ -170,7 +166,7 @@ function Tabel() {
 
     return (
         <>
-            <h4>Baarmoedermondhoogte (bepaalt de breedte van de disk)</h4>
+            <h4 className="legend">Baarmoedermondhoogte (bepaalt de breedte van de disk)</h4>
             <form>
                 <label>
                     <input type="radio" value="hoge-bmm" name="bmm"
@@ -193,18 +189,18 @@ function Tabel() {
                     Ik weet het niet, geef me gemiddelde disks.
                 </label><br/>
 
-                <h4>Herbruikbaar?</h4>
+                <h4 className="legend">Herbruikbaar?</h4>
                 <label><input type="radio" value="ja-hbb" name="herbruikbaar" onChange={handleOptionChange}
                               checked={reusable === "ja-hbb"}/>
-                    Ik wil een herbruikbare disk (gaat tot 10 jaar mee)</label><br/>
+                    Ik wil een herbruikbare disk (gaat tot 10 jaar mee, vanaf €20)</label><br/>
                 <label><input type="radio" value="nee-hbb" name="herbruikbaar" onChange={handleOptionChange}
                               checked={reusable === "nee-hbb"}/>
-                    Ik wil een wegwerp exemplaar (gaat 1x mee)</label><br/>
+                    Ik wil een wegwerp exemplaar (gaat 1x mee, rond de €4 per stuk)</label><br/>
                 <label><input type="radio" value="geen-hbb" name="herbruikbaar" onChange={handleOptionChange}
                               checked={reusable === "geen-hbb"}/>
                     Maakt me niet uit, laat me alle opties zien.</label>
 
-                <h4>Steeltjes?</h4>
+                <h4 className="legend">Steeltje?</h4>
                 <label> <input type="radio" value="ja-steel" name="steel" onChange={handleOptionChange}
                                checked={stem === "ja-steel"}/>
                     Ik wil extra hulp bij het eruit halen. Dus een disk met een
@@ -212,20 +208,19 @@ function Tabel() {
                 <label><input type="radio" value="nee-steel" name="steel" onChange={handleOptionChange}
                               checked={stem === "nee-steel"}/>
                     Het maakt me niet uit, laat me alle opties zien.</label><br/>
-                <button type="button" onClick={resetFilters}>X Reset</button>
+                <button type="button" onClick={resetFilters} className="reset-btn">X Reset</button>
             </form>
             <br/>
 
             <div className="discsTabel">
                 <DataTable
-                    title="Menstruatiedisks vergelijkingstabel"
                     columns={columns}
                     data={data}
                     striped={true}
                     highlightOnHover={true}
                     dense={true}
                     persistTableHead={true}
-                    noDataComponent="geen data"
+                    noDataComponent="Met deze specificaties zijn er geen disks gevonden. Probeer eens een ander antwoord te geven."
                 />
             </div>
         </>

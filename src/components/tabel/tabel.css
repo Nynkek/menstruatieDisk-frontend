@@ -1,37 +1,21 @@
-.dt_Table{
+.dt_Table {
     background-color: var(--yellow);
 }
-.rdt_TableRow{
-    background-color: var(--red);
+
+.rdt_TableRow {
+    background-color: var(--yellow);
+    border: thin solid var(--yellow);
 }
-.rdt_TableCol{
+
+.rdt_TableCol {
     background-color: var(--pink);
-}
-.rdt_TableCol_Sortable{
-    background-color: var(--pink);
+    font-weight: bold;
     text-align: center;
 }
-.rdt_TableCell{
-    background-color: var(--yellow);
 
-}
-.rdt_TableHeader{
-    /*background-color: red;*/
-}
-.rdt_TableFooter{
-    /*background-color: red;*/
-}
-.rdt_TableHead{
-    /*background-color: red;*/
-}
-.rdt_TableHeadRow{
-    /*background-color: red;*/
-}
-.rdt_TableBody{
-    /*background-color: red;*/
-}
-.rdt_ExpanderRow{
-    /*background-color: red;*/
+.rdt_TableCell {
+    background-color: var(--yellow);
+    margin: 0;
 }
 
 .discsTabel {
@@ -44,23 +28,38 @@ label {
     margin-left: 1ch;
     line-height: 1.5rem;
 }
-label:hover {
-  font-weight: bolder;
-}
 
-input[type="radio"]:checked {
+label:hover {
     font-weight: bolder;
 }
 
-:checked {
-    color: red;
-    border: 1px solid blue;
-}
-
 input {
-    padding: 10px;
-    width: 3ch;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--black);
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
 }
 
-input[type="radio"] {
+input:checked {
+    border: 6px solid var(--black);
+    background-color: var(--pink);
+}
+
+.legend {
+    color: var(--black);
+    background-color: var(--orange);
+    padding: 5px 10px;
+    border-radius: 0;
+    border: 0;
+}
+
+.reset-btn {
+    background-color: var(--red);
 }
