@@ -6,6 +6,7 @@ import "./form.css";
 
 function DiscAddForm({preloadedValues}) {
     const {register, formState: {errors}, handleSubmit} = useForm({defaultValues: preloadedValues});
+    const [discData, setDiscData] = useState({});
     const [addSuccess, toggleAddSuccess] = useState(false)
     const [createdDate, setCreatedDate] = useState('');
     const [name, setName] = useState('');
@@ -24,7 +25,29 @@ function DiscAddForm({preloadedValues}) {
     const [image, setImage] = useState('');
     const [isAvailableInNL, toggleIsAvailableInNL] = useState(false);
     const [material, setMaterial] = useState(0);
-    const [selectedFile, setSelectedFile] = useState(null);
+
+    // setDiscData({
+    //     createdDateForm: preloadedValues.createdData,
+    //     nameForm: preloadedValues.name,
+    //     brandForm: preloadedValues.brand,
+    //     modelForm: preloadedValues.model,
+    //     widthForm: preloadedValues.width,
+    //     capacityForm: preloadedValues.capacity,
+    //     rimWidthForm: preloadedValues.rimWidth,
+    //     isReusableForm: preloadedValues.isReusable,
+    //     hasStemForm: preloadedValues.hasStem,
+    //     designFeatureForm: preloadedValues.designFeature,
+    //     shapeForm: preloadedValues.shape,
+    //     firmnessForm: preloadedValues.firmness,
+    //     linkToReviewForm: preloadedValues.linkToStore,
+    //     linkToStoreForm: preloadedValues.linkToReview,
+    //     imageForm: preloadedValues.image,
+    //     isAvailableInNLForm: preloadedValues.isAvailableInNL,
+    //     materialForm: preloadedValues.material,
+    //     usernameForm: preloadedValues.username,
+    // });
+    console.log("disk data komt hieronder");
+    console.log(discData);
     // const formData = new FormData();
     //
     // formData.append("name", name);

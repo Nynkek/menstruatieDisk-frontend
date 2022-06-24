@@ -20,7 +20,7 @@ function Footer() {
                         <li><Link to="/inloggen">Inloggen</Link></li>
                         {auth && <li><Link to="/profiel">Profiel</Link></li>}
                         {auth && <li><Link to="/disk-toevoegen">Disc toevoegen</Link></li>}
-                        {auth && <li><Link to="/disk-accepteren">Disc toevoegen</Link></li>}
+                        {auth && <li><Link to="/disk-accepteren">Disc accepteren</Link></li>}
                     </ul>
                 </div>
                 <div className="footer-txt">

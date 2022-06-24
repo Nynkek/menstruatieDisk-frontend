@@ -1,5 +1,4 @@
-import React from 'react';
-import {useEffect} from "@types/react";
+import React, {useEffect} from 'react';
 import pageImg from "../assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
@@ -20,7 +19,7 @@ function ApproveDisc({headerImageHandler, pageTitleHandler}) {
                 <p>Heb je vragen neem dan contact op. ▤ ▥ ▦ ▧ ▨ ▩ </p>
             </TextContainer>
             <YellowContentBox>
-                <DiscApproveForm/>
+                <DiscApproveForm pendingDiscId="10" teksttest="test test tekst"/>
             </YellowContentBox>
 
         </>
