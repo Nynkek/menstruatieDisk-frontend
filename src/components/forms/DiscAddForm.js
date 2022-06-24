@@ -4,8 +4,8 @@ import axios from "axios";
 import "./form.css";
 
 
-function DiscAddForm() {
-    const {register, formState: {errors}, handleSubmit} = useForm({mode: 'onBlur'});
+function DiscAddForm({preloadedValues}) {
+    const {register, formState: {errors}, handleSubmit} = useForm({defaultValues: preloadedValues});
     const [addSuccess, toggleAddSuccess] = useState(false)
     const [createdDate, setCreatedDate] = useState('');
     const [name, setName] = useState('');
@@ -30,8 +30,6 @@ function DiscAddForm() {
     // formData.append("name", name);
     // formData.append("file", selectedFile);
     // https://www.pluralsight.com/guides/how-to-use-a-simple-form-submit-with-files-in-react
-
-
 
 
     async function onSubmit(e) {
@@ -94,7 +92,7 @@ function DiscAddForm() {
         } catch (error) {
             console.error('There was an error!', error);
         }
-        ;
+
     }
 
     return (
@@ -103,98 +101,157 @@ function DiscAddForm() {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <label htmlFor="details-name">
-                    Naam:
+                    Naam
                     <input type="text"
+                           className={errors.nameForm && 'field-error'}
                            placeholder="Hoe noemen jullie je disks?"
                            id="details-name"
                            {...register("nameForm", {maxLength: 80})} />
                 </label>
-                {errors.nameForm && <p>{errors.nameForm.message}</p>}
-                <label htmlFor="details-brand">Merk
-                    <input type="text" placeholder="Merknaam"
-                           id="details-brand"
-                           {...register("brandForm", {
-                               required: "Veld mag niet leeg zijn.",
-                               maxLength: 100
-                           })} />
-                </label>
-                {errors.brandForm && <p>{errors.brandForm.message}</p>}
+                {errors.nameForm && <p className="error-label">{errors.nameForm.message}</p>}<label htmlFor="details-brand">Merk
+                <input type="text" placeholder="Merknaam"
+                       id="details-brand"
+                       className={errors.brandForm && 'field-error'}
+                       {...register("brandForm", {
+                           required: "Veld mag niet leeg zijn.",
+                           maxLength: 100
+                       })} />
+            </label>
+                {errors.brandForm && <p className="error-label">{errors.brandForm.message}</p>}
                 <label htmlFor="details-model">Model
                     <input type="text"
+                           className={errors.modelForm && 'field-error'}
                            placeholder="bijv M, S, of OS (one size)"
                            id="details-model"
                            {...register("modelForm", {required: "Veld mag niet leeg zijn."})} />
                 </label>
-                {errors.modelForm && <p>{errors.modelForm.message}</p>}
-                <label htmlFor="details-width">Breedte
+                {errors.modelForm && <p className="error-label">{errors.modelForm.message}</p>}
+                <label htmlFor="details-width">Breedte (mm)
                     <input type="number" placeholder="Breedte (in mm)"
+                           className={errors.widthForm && 'field-error'}
                            id="details-width"
                            {...register("widthForm", {
-                               required: "Veld mag niet leeg zijn.",
-                               max: 100,
-                               min: 0,
-                               maxLength: 3
+                               required: "Veld mag niet leeg, moet een getal zijn en mag geen komma's bevatten.",
+                               max: {
+                                   value: 100,
+                                   message: "kan niet meer dan 100 zijn",
+                               },
+                               min: {
+                                   value: 0,
+                                   message: "kan niet minder dan 0 zijn",
+                               },
+                               maxLength: {
+                                   value: 3,
+                                   message: "het moet in mm, dus kan niet meer dan 3 karakters hebben.",
+                               }
                            })} />
                 </label>
-                {errors.widthForm && <p>{errors.widthForm.message}</p>}
-                <label htmlFor="details-capacity">Inhoud (in ml)
+                {errors.widthForm && <p className="error-label">{errors.widthForm.message}</p>}
+                <label htmlFor="details-capacity">Inhoud (ml)
                     <input type="number" placeholder="Inhoud (ml)"
                            id="details-capacity"
+                           className={errors.capacityForm && 'field-error'}
                            {...register("capacityForm", {
-                               required: "Veld mag niet leeg zijn.",
-                               max: 100,
-                               min: 0,
-                               maxLength: 3
+                               required: "Veld mag niet leeg, moet een getal zijn en mag geen komma's bevatten.",
+                               max: {
+                                   value: 100,
+                                   message: "kan niet meer dan 100 zijn",
+                               },
+                               min: {
+                                   value: 0,
+                                   message: "kan niet minder dan 0 zijn",
+                               },
+                               maxLength: {
+                                   value: 3,
+                                   message: "het moet in mm, dus kan niet meer dan 3 karakters hebben.",
+                               }
                            })} />
                 </label>
-                {errors.capacityForm && <p>{errors.capacityForm.message}</p>}
+                {errors.capacityForm && <p className="error-label">{errors.capacityForm.message}</p>}
                 <label htmlFor="details-rimWidth">Randdikte (mm)
                     <input type="number" placeholder="Randdikte (mm)"
                            id="details-rimWidth"
+                           className={errors.rimWidthForm && 'field-error'}
                            {...register("rimWidthForm", {
-                               required: "Veld mag niet leeg zijn.",
-                               max: 100,
-                               min: 0,
-                               maxLength: 2
+                               required: "Veld mag niet leeg, moet een getal zijn en mag geen komma's bevatten.",
+                               max: {
+                                   value: 100,
+                                   message: "kan niet meer dan 100 zijn",
+                               },
+                               min: {
+                                   value: 0,
+                                   message: "kan niet minder dan 0 zijn",
+                               },
+                               maxLength: {
+                                   value: 2,
+                                   message: "het moet in mm, dus kan niet meer dan 2 karakters hebben.",
+                               }
                            })} />
                 </label>
-                {errors.rimWidthForm && <p>{errors.rimWidthForm.message}</p>}
-                <label htmlFor="details-isReusable" className="checkbox">
-                    <input type="checkbox" placeholder="is herbruikbaar"
-                           id="details-isReusable"
-                           {...register("isReusableForm", {})} />
-                    <span className="checkmark"></span>Is herbruikbaar?
-                </label>
-                {errors.isReusableForm && <p>{errors.isReusableForm.message}</p>}
+                {errors.rimWidthForm && <p className="error-label">{errors.rimWidthForm.message}</p>}
+                <div className="radio-container">
+                <span className="label">Is herbruikbaar</span>
+                    <div className="radio-btn-option">
+                        <label className="radio">
+                            <input className={errors.isReusableForm && 'field-error'}
+                               {...register("isReusableForm",
+                                   {required: "Kies een optie"})} type="radio" value="yes"/>
+                            Ja</label>
+                    </div>
+                    <div className="radio-btn-option">
+                        <label className="radio">
+                        <input className={errors.isReusableForm && 'field-error'}
+                               {...register("isReusableForm",
+                                   {required: "Kies een optie"})} type="radio" value=" no"/>
+                            Nee</label>
+                    </div></div>
+                {errors.isReusableForm && <p className="error-label">{errors.isReusableForm.message}</p>}
+
+
                 <label htmlFor="details-designFeature">Opvallende design-keuzes?
                     <textarea
                         id="details-designFeature"
+                        className={errors.designFeatureForm && 'field-error'}
                         {...register("designFeatureForm", {
                             required: "Veld mag niet leeg zijn.",
                             maxLength: 80
                         })} />
                 </label>
-                {errors.designFeatureForm && <p>{errors.designFeatureForm.message}</p>}
-                <label htmlFor="details-hasStem" className="checkbox">
-                    <input type="checkbox"
-                           placeholder="heeft steeltje/lusje/touwtje"
-                           id="details-hasStem"
-                           {...register("hasStemForm", {required: "Veld mag niet leeg zijn."})} />
-                    <span className="checkmark"></span>Heeft een steeltje/lusje/touwtje?
-                </label>
-                {errors.hasStemForm && <p>{errors.hasStemForm.message}</p>}
+                {errors.designFeatureForm && <p className="error-label">{errors.designFeatureForm.message}</p>}
+
+
+                <div className="radio-container">
+                    <span className="label">Heeft steeltje, lusje of touwtje?</span>
+                    <div className="radio-btn-option">
+                        <label className="radio">
+                            <input className={errors.hasStemForm && 'field-error'}
+                                   {...register("hasStemForm",
+                                       {required: "Kies een optie"})} type="radio" value="yes"/>
+                            Ja</label>
+                    </div>
+                    <div className="radio-btn-option">
+                        <label className="radio">
+                            <input className={errors.hasStemForm && 'field-error'}
+                                   {...register("hasStemForm",
+                                       {required: "Kies een optie"})} type="radio" value=" no"/>
+                            Nee</label>
+                    </div></div>
+                {errors.hasStemForm && <p className="error-label">{errors.hasStemForm.message}</p>}
+
                 <label htmlFor="details-shape">Vorm
-                    <input type="text" placeholder="Vorm (rond, ovaal?)"
-                           id="detailsshape"
+                    <input type="text" placeholder="Rond, ovaal, andere vorm?"
+                           id="details-shape"
+                           className={errors.shapeForm && 'field-error'}
                            {...register("shapeForm", {
                                required: "Veld mag niet leeg zijn.",
                                maxLength: 80
                            })} />
                 </label>
-                {errors.shapeForm && <p>{errors.shapeForm.message}</p>}
+                {errors.shapeForm && <p className="error-label">{errors.shapeForm.message}</p>}
                 <label htmlFor="details-firmness">Hardheid
                     <select
                         id="details-firmness"
+                        className={errors.firmnessForm && 'field-error'}
                         {...register("firmnessForm",
                             {required: "Veld mag niet leeg zijn."})}>
                         <option value="zacht">zacht</option>
@@ -202,58 +259,76 @@ function DiscAddForm() {
                         <option value="hard">hard</option>
                     </select>
                 </label>
-                {errors.firmnessForm && <p>{errors.firmnessForm.message}</p>}
+                {errors.firmnessForm && <p className="error-label">{errors.firmnessForm.message}</p>}
                 <label htmlFor="details-linkToStore">Link naar (web)winkel
                     <input type="url"
+                           className={errors.linkToStoreForm && 'field-error'}
                            placeholder="Link naar webwinkel"
                            id="details-linkToStore"
                            {...register("linkToStoreForm", {maxLength: 800})} />
                 </label>
-                {errors.nameForm && <p>{errors.nameForm.message}</p>}
+                {errors.linkToStoreForm && <p className="error-label">{errors.linkToStoreForm.message}</p>}
                 <label htmlFor="details-linkToReview">Link naar een review
                     <input type="url"
+                           className={errors.linkToReviewForm && 'field-error'}
                            placeholder="Link naar een review"
                            id="details-linkToReview"
                            {...register("linkToReviewForm", {maxLength: 800})} />
                 </label>
-                {errors.linkToReviewForm && <p>{errors.linkToReviewForm.message}</p>}
+                {errors.linkToReviewForm && <p className="error-label">{errors.linkToReviewForm.message}</p>}
                 <label htmlFor="details-image">Afbeelding URL
                     <input type="file" placeholder="Afbeelding"
                            id="details-image"
+                           className={errors.imageForm && 'field-error'}
                            {...register("imageForm", {})} />
                 </label>
-                {errors.imageForm && <p>{errors.imageForm.message}</p>}
-                <label htmlFor="details-isAvailableInNL" className="checkbox">
-                    <input type="checkbox"
-                           placeholder="is in een Nederlandse (web)winkel te koop?"
-                           id="details-isAvailableInNL"
-                           {...register("isAvailableInNLForm", {})} />
-                    <span className="checkmark"></span> Is in NL te koop.
-                </label>
-                {errors.isAvailableInNLForm && <p>{errors.isAvailableInNLForm.message}</p>}
+                {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
+
+                <div className="radio-container">
+                    <span className="label">Is in een Nederlandse (web)winkel te koop?</span>
+                    <div className="radio-btn-option">
+                        <label className="radio">
+                            <input className={errors.isAvailableInNLForm && 'field-error'}
+                                   {...register("isAvailableInNLForm",
+                                       {required: "Kies een optie"})} type="radio" value="yes"/>
+                            Ja</label>
+                    </div>
+                    <div className="radio-btn-option">
+                        <label className="radio">
+                            <input className={errors.isAvailableInNLForm && 'field-error'}
+                                   {...register("isAvailableInNLForm",
+                                       {required: "Kies een optie"})} type="radio" value=" no"/>
+                            Nee</label>
+                    </div></div>
+                {errors.isAvailableInNLForm && <p className="error-label">{errors.isAvailableInNLForm.message}</p>}
+
                 <label htmlFor="details-material">Gemaakt van?
                     <select
                         id="details-material"
+                        className={errors.materialForm && 'field-error'}
                         {...register("materialForm", {required: "Veld mag niet leeg zijn."})}>
                         <option value="polymer">polymer</option>
                         <option value=" silicone">silicone</option>
                         <option value="anders">anders</option>
                     </select>
                 </label>
-                {errors.materialForm && <p>{errors.materialForm.message}</p>}
+                {errors.materialForm && <p className="error-label">{errors.materialForm.message}</p>}
                 <label htmlFor="details-createdDate">Verstuurd op
                     <input type="datetime-local" placeholder="Datum"
                            id="details-createdDate"
+                           pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                           className={errors.createdDateForm && 'field-error'}
                            {...register("createdDateForm", {})} />
                 </label>
-                {errors.createdDateForm && <p>{errors.createdDateForm.message}</p>}
+                {errors.createdDateForm && <p className="error-label">{errors.createdDateForm.message}</p>}
                 <label htmlFor="details-username">Wie?
                     <input type="text"
                            placeholder="Wie verstuurt dit formulier?"
                            id="details-username"
+                           className={errors.usernameForm && 'field-error'}
                            {...register("usernameForm", {})} />
                 </label>
-                {errors.usernameForm && <p>{errors.usernameForm.message}</p>}
+                {errors.usernameForm && <p className="error-label">{errors.usernameForm.message}</p>}
                 <button type="submit">Verstuur disk-gegevens</button>
             </form>
             {addSuccess === true && <p>Disc is verstuurd ter goedkeuring! Je mag de pagina sluiten.</p>}

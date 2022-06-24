@@ -16,6 +16,7 @@ import Header from "./components/pageItems/header/Header";
 import PrivateRoute from "./components/pageItems/privateRoute/PrivateRoute";
 import Footer from "./components/pageItems/footer/Footer";
 import AddDisc from "./pages/AddDisc";
+import ApproveDisc from "./pages/ApproveDisc";
 
 
 function App() {
@@ -30,17 +31,17 @@ function App() {
             <Routes>
                 <Route path="/*"
                        element={<HomePage headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
-                <Route path="/informatie-over-menstruatiedisks/*"
+                <Route path="/informatie-over-menstruatiedisks/"
                        element={<Information headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
-                <Route path="/vergelijk-meerdere-menstruatiedisks/*"
+                <Route path="/vergelijk-meerdere-menstruatiedisks/"
                        element={<Compare headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
 
-                <Route path="/contact/*"
+                <Route path="/contact/"
                        element={<Contact headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
-                <Route path="/registreren/*"
+                <Route path="/registreren/"
                        element={<SignUp headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
 
@@ -48,14 +49,17 @@ function App() {
                        element={<SignIn headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
 
-                <Route path="/profiel/*"
+                <Route path="/profiel/"
                               element={<PrivateRoute><Profile headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/></PrivateRoute>}/>
 
                 <Route path="/doneren"
                        element={<Donate headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
-                <Route path="/disc-toevoegen"
+                <Route path="/disk-toevoegen"
                         element={<AddDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
+
+                <Route path="/disk-accepteren"
+                       element={<ApproveDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
             </Routes>
             <Footer/>
         </div>

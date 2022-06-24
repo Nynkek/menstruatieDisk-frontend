@@ -3,11 +3,15 @@
     flex-direction: column;
 }
 
+.discAddForm .radio {
+    display: initial;
+    /*flex-direction: row;*/
+}
+
 .discAddForm .checkbox {
     display: revert;
     margin-top: 2ch;
     margin-bottom: 2ch;
-
 }
 
 
@@ -78,12 +82,67 @@
     background-color: var(--bluegreen);
 }
 
-.discAddForm input[type=text], .discAddForm input[type=number], .discAddForm input[type=url], .discAddForm select, .discAddForm textarea, .discAddForm input[type=datetime-local]  {
+.discAddForm input[type=text], .discAddForm input[type=number], .discAddForm input[type=url], .discAddForm select, .discAddForm textarea, .discAddForm input[type=datetime-local] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     font-size: 1em;
     border-radius: 0px;
-    border: var(--black);
+}
+
+.discAddForm .field-error {
+    border: 2px solid var(--red);
+}
+
+
+.discAddForm label:hover {
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.discAddForm .radio input {
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--black);
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    /*margin-left: 5px;*/
+    position: relative;
+    top: 4px;
+}
+
+.discAddForm input:checked {
+    border: 6px solid var(--black);
+    background-color: var(--pink);
+}
+
+.radio-btn-option {
+    width: 20ch;
+}
+
+.label {
+    margin-left: 1ch;
+}
+
+.radio {
+    padding-right: 10ch;
+    padding-left: 2ch;
+}
+
+.radio-container {
+    margin-bottom: 2ch;
+    margin-top: 2ch;
+}
+
+.error-label {
+    color: var(--red);
+    margin-left: 2ch;
+}
+
+.error-label:before {
+    content: "↑";
+    margin-right: 1ch;
 }
