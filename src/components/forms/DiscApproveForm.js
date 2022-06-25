@@ -6,104 +6,128 @@ import DiscAddForm from "./DiscAddForm";
 
 function DiscApproveForm({pendingDiscId, teksttest}) {
     const [discId, setDiscId] = useState(10);
-    const [discData, setDiscData] = useState({});
+    const [discData, setDiscData] = useState(null);
 
-useEffect(() => {
-    fetchData();
-    async function fetchData() {
-        try {
-            const response = await axios.get(`http://localhost:8080/pendingdiscs/${discId}`);
-            console.log(response.data);
-            // setDiscData(response.data);
-            setDiscData({
-                // createdDateForm: response.data.createdData,
-                nameForm: response.data.name,
-                brandForm: response.data.brand,
-                // modelForm: response.data.model,
-                modelForm: "test",
-                widthForm: response.data.width,
-                capacityForm: response.data.capacity,
-                rimWidthForm: response.data.rimWidth,
-                isReusableForm: response.data.isReusable,
-                hasStemForm: response.data.hasStem,
-                designFeatureForm: response.data.designFeature,
-                shapeForm: response.data.shape,
-                firmnessForm: response.data.firmness,
-                linkToReviewForm: response.data.linkToStore,
-                linkToStoreForm: response.data.linkToReview,
-                imageForm: response.data.image,
-                isAvailableInNLForm: response.data.isAvailableInNL,
-                materialForm: response.data.material,
-                usernameForm: response.data.username,
-            });
-        } catch (error) {
-            console.error("een error met data ophalen", error);
-        };
-    }
-},[])
+    // const preloadedValues = {
+    //     createdDateForm: "test",
+    //     nameForm: "test",
+    //     brandForm: "test",
+    //     modelForm: "test",
+    //     widthForm: "test",
+    //     capacityForm: "test",
+    //     rimWidthForm: "test",
+    //     isReusableForm: "test",
+    //     hasStemForm: "test",
+    //     designFeatureForm: "test",
+    //     shapeForm: "test",
+    //     firmnessForm: "test",
+    //     linkToReviewForm: "test",
+    //     linkToStoreForm: "test",
+    //     imageForm: "test",
+    //     isAvailableInNLForm: "test",
+    //     materialForm: "test",
+    //     usernameForm: "test",
+    // }
+
+    useEffect(() => {
+
+            async function fetchData() {
+                try {
+                    const response = await axios.get(`http://localhost:8080/pendingdiscs/${discId}`);
+                    console.log("response.data: ")
+                    console.log(response.data);
+                    // setDiscData(response.data);
+                    setDiscData({
+                        createdDateForm: response.data.createdData,
+                        nameForm: response.data.name,
+                        brandForm: response.data.brand,
+                        modelForm: response.data.model,
+                        widthForm: response.data.width,
+                        capacityForm: response.data.capacity,
+                        rimWidthForm: response.data.rimWidth,
+                        isReusableForm: response.data.isReusable,
+                        hasStemForm: response.data.hasStem,
+                        designFeatureForm: response.data.designFeature,
+                        shapeForm: response.data.shape,
+                        firmnessForm: response.data.firmness,
+                        linkToReviewForm: response.data.linkToStore,
+                        linkToStoreForm: response.data.linkToReview,
+                        imageForm: response.data.image,
+                        isAvailableInNLForm: response.data.isAvailableInNL,
+                        materialForm: response.data.material,
+
+
+                        // usernameForm: response.data.username,
+                    });
+                    console.log("discData1: ")
+                    console.log(discData)
+// ;                    let updatedState = {
+//                         ...discData,
+//                     }
+//                     switch (response.data.hasStem) {
+//                         case true:
+//                             updatedState = {
+//                                 ...discData,
+//                                 hasStemForm: "true",
+//                             }
+//                             break
+//                         case false:
+//                             updatedState = {
+//                                 ...discData,
+//                                 hasStemForm: "false",
+//                             }
+//                     }
+//                     switch (response.data.isReusable) {
+//                         case true:
+//                             updatedState = {
+//                                 ...discData,
+//                                 isReusableForm: "true",
+//                             }
+//                         case false:
+//                             updatedState = {
+//                                 ...discData,
+//                                 isReusableForm: "false",
+//                             }
+//                     }
+//                     switch (response.data.isAvailableInNL) {
+//                         case true:
+//                             updatedState = {
+//                                 ...discData,
+//                                 isAvailableInNLForm: "true",
+//                             }
+//                             break
+//                         case false:
+//                             updatedState = {
+//                                 ...discData,
+//                                 isAvailableInNLForm: "false",
+//                             }
+//                     }
+                    console.log("updatedState: ")
+
+                    // console.log(updatedState);
+                    // setDiscData(updatedState);
+                    console.log("discData 2: ")
+                    console.log(discData);
+
+                } catch (error) {
+                    console.error("een error met data ophalen", error);
+                }
+                ;
+            }
+
+            fetchData();
+        }, []
+    )
+
     console.log("hier komt het weer")
     console.log(discData);
     console.log("dit was het");
-    const preloadedValues = {
-        createdDateForm: "test",
-        nameForm: "test",
-        brandForm: discData.brandForm,
-        modelForm: "test",
-        widthForm: "test",
-        capacityForm: "test",
-        rimWidthForm: "test",
-        isReusableForm: "test",
-        hasStemForm: "test",
-        designFeatureForm: "test",
-        shapeForm: "test",
-        firmnessForm: "test",
-        linkToReviewForm: "test",
-        linkToStoreForm: "test",
-        imageForm: "test",
-        isAvailableInNLForm: "test",
-        materialForm: "test",
-        usernameForm: "test",
-    }
-
-    // setDiscId(pendingDiscId);
-    console.log(discData.brand);
-
-//     axios.get(`http://localhost:8080/pendingdiscs/${discId}`)
-//         .then((response) => {
-//             console.log(response.data);
-//             setDiscData(response.data);
-//             setDiscData({
-//                 createdDateForm: response.data.createdData,
-//                 nameForm: response.data.name,
-//                 brandForm: response.data.brand,
-//                 modelForm: response.data.model,
-//                 widthForm: response.data.width,
-//                 capacityForm: response.data.capacity,
-//                 rimWidthForm: response.data.rimWidth,
-//                 isReusableForm: response.data.isReusable,
-//                 hasStemForm: response.data.hasStem,
-//                 designFeatureForm: response.data.designFeature,
-//                 shapeForm: response.data.shape,
-//                 firmnessForm: response.data.firmness,
-//                 linkToReviewForm: response.data.linkToStore,
-//                 linkToStoreForm: response.data.linkToReview,
-//                 imageForm: response.data.image,
-//                 isAvailableInNLForm: response.data.isAvailableInNL,
-//                 materialForm: response.data.material,
-//                 usernameForm: response.data.username,
-//             });
-//             // console.log(preloadedValues)
-//             console.log("test")
-//         }).catch(error => {
-//         console.error('There was an error!', error);
-//     });
 
 
-    // fetchData();
     return (
         <div>
             {teksttest}
-            <DiscAddForm preloadedValues={discData}/>
+            {discData ? <DiscAddForm preloadedValues={discData}/> : <div>Loading...</div>}
         </div>
     );
 }

@@ -26,28 +26,7 @@ function DiscAddForm({preloadedValues}) {
     const [isAvailableInNL, toggleIsAvailableInNL] = useState(false);
     const [material, setMaterial] = useState(0);
 
-    // setDiscData({
-    //     createdDateForm: preloadedValues.createdData,
-    //     nameForm: preloadedValues.name,
-    //     brandForm: preloadedValues.brand,
-    //     modelForm: preloadedValues.model,
-    //     widthForm: preloadedValues.width,
-    //     capacityForm: preloadedValues.capacity,
-    //     rimWidthForm: preloadedValues.rimWidth,
-    //     isReusableForm: preloadedValues.isReusable,
-    //     hasStemForm: preloadedValues.hasStem,
-    //     designFeatureForm: preloadedValues.designFeature,
-    //     shapeForm: preloadedValues.shape,
-    //     firmnessForm: preloadedValues.firmness,
-    //     linkToReviewForm: preloadedValues.linkToStore,
-    //     linkToStoreForm: preloadedValues.linkToReview,
-    //     imageForm: preloadedValues.image,
-    //     isAvailableInNLForm: preloadedValues.isAvailableInNL,
-    //     materialForm: preloadedValues.material,
-    //     usernameForm: preloadedValues.username,
-    // });
-    console.log("disk data komt hieronder");
-    console.log(discData);
+
     // const formData = new FormData();
     //
     // formData.append("name", name);
@@ -63,15 +42,12 @@ function DiscAddForm({preloadedValues}) {
         setWidth(e.widthForm);
         setCapacity(e.capacityForm);
         setRimWidth(e.rimWidthForm);
-        toggleIsReusable(e.isReusableForm);
-        toggleHasStem(e.hasStemForm);
         setDesignFeature(e.designFeatureForm);
         setShape(e.shapeForm);
         setFirmness(e.firmnessForm);
         setLinkToReview(e.linkToReviewForm);
         setLinkToStore(e.linkToStoreForm);
         setImage(e.imageForm[0]);
-        toggleIsAvailableInNL(e.isAvailableInNLForm);
 
         switch (e.materialForm) {
             case "silicone":
@@ -83,6 +59,31 @@ function DiscAddForm({preloadedValues}) {
             case "anders":
             default:
         }
+
+        switch (e.hasStemForm) {
+            case "true":
+                toggleHasStem(true);
+                break
+            case "false":
+                toggleHasStem(false);
+        }
+        switch (e.isReusableForm) {
+            case "true":
+                toggleIsReusable(true);
+                break
+            case "false":
+                toggleIsReusable(false);
+        }
+        switch (e.isAvailableInNLForm) {
+            case "true":
+                toggleIsAvailableInNL(true);
+                break
+            case "false":
+                toggleIsAvailableInNL(false);
+        }
+
+
+
         // if (image.size > 1024) {
         //     onFileSelectError({error: "File size cannot exceed more than 1MB"})
         // } else {
@@ -110,6 +111,7 @@ function DiscAddForm({preloadedValues}) {
                 material: material,
             },);
             console.log(response.data);
+            console.log("als het goed is is de disk verstuurd...");
             toggleAddSuccess(true);
             // navigate("/inloggen");
         } catch (error) {
@@ -217,15 +219,17 @@ function DiscAddForm({preloadedValues}) {
                     <div className="radio-btn-option">
                         <label className="radio">
                             <input className={errors.isReusableForm && 'field-error'}
+                                   checked={preloadedValues.isReusableForm === "true"}
                                {...register("isReusableForm",
-                                   {required: "Kies een optie"})} type="radio" value="yes"/>
+                                   {required: "Kies een optie"})} type="radio" value="true"/>
                             Ja</label>
                     </div>
                     <div className="radio-btn-option">
                         <label className="radio">
                         <input className={errors.isReusableForm && 'field-error'}
+                               checked={isReusable ? true : ""}
                                {...register("isReusableForm",
-                                   {required: "Kies een optie"})} type="radio" value=" no"/>
+                                   {required: "Kies een optie"})} type="radio" value="false"/>
                             Nee</label>
                     </div></div>
                 {errors.isReusableForm && <p className="error-label">{errors.isReusableForm.message}</p>}
@@ -249,14 +253,14 @@ function DiscAddForm({preloadedValues}) {
                         <label className="radio">
                             <input className={errors.hasStemForm && 'field-error'}
                                    {...register("hasStemForm",
-                                       {required: "Kies een optie"})} type="radio" value="yes"/>
+                                       {required: "Kies een optie"})} type="radio" value="true"/>
                             Ja</label>
                     </div>
                     <div className="radio-btn-option">
                         <label className="radio">
                             <input className={errors.hasStemForm && 'field-error'}
                                    {...register("hasStemForm",
-                                       {required: "Kies een optie"})} type="radio" value=" no"/>
+                                       {required: "Kies een optie"})} type="radio" value="false"/>
                             Nee</label>
                     </div></div>
                 {errors.hasStemForm && <p className="error-label">{errors.hasStemForm.message}</p>}
@@ -313,14 +317,14 @@ function DiscAddForm({preloadedValues}) {
                         <label className="radio">
                             <input className={errors.isAvailableInNLForm && 'field-error'}
                                    {...register("isAvailableInNLForm",
-                                       {required: "Kies een optie"})} type="radio" value="yes"/>
+                                       {required: "Kies een optie"})} type="radio" value="true"/>
                             Ja</label>
                     </div>
                     <div className="radio-btn-option">
                         <label className="radio">
                             <input className={errors.isAvailableInNLForm && 'field-error'}
                                    {...register("isAvailableInNLForm",
-                                       {required: "Kies een optie"})} type="radio" value=" no"/>
+                                       {required: "Kies een optie"})} type="radio" value="false"/>
                             Nee</label>
                     </div></div>
                 {errors.isAvailableInNLForm && <p className="error-label">{errors.isAvailableInNLForm.message}</p>}
