@@ -45,63 +45,21 @@ function DiscApproveForm({pendingDiscId, teksttest}) {
                         widthForm: response.data.width,
                         capacityForm: response.data.capacity,
                         rimWidthForm: response.data.rimWidth,
-                        isReusableForm: response.data.isReusable,
-                        hasStemForm: response.data.hasStem,
+                        isReusableForm: response.data.isReusable ? "true" : "false",
+                        hasStemForm: response.data.hasStem ? "true" : "false",
                         designFeatureForm: response.data.designFeature,
                         shapeForm: response.data.shape,
                         firmnessForm: response.data.firmness,
                         linkToReviewForm: response.data.linkToStore,
                         linkToStoreForm: response.data.linkToReview,
                         imageForm: response.data.image,
-                        isAvailableInNLForm: response.data.isAvailableInNL,
+                        isAvailableInNLForm: response.data.isAvailableInNL ? "true" : "false",
                         materialForm: response.data.material,
-
-
                         // usernameForm: response.data.username,
                     });
                     console.log("discData1: ")
                     console.log(discData)
-// ;                    let updatedState = {
-//                         ...discData,
-//                     }
-//                     switch (response.data.hasStem) {
-//                         case true:
-//                             updatedState = {
-//                                 ...discData,
-//                                 hasStemForm: "true",
-//                             }
-//                             break
-//                         case false:
-//                             updatedState = {
-//                                 ...discData,
-//                                 hasStemForm: "false",
-//                             }
-//                     }
-//                     switch (response.data.isReusable) {
-//                         case true:
-//                             updatedState = {
-//                                 ...discData,
-//                                 isReusableForm: "true",
-//                             }
-//                         case false:
-//                             updatedState = {
-//                                 ...discData,
-//                                 isReusableForm: "false",
-//                             }
-//                     }
-//                     switch (response.data.isAvailableInNL) {
-//                         case true:
-//                             updatedState = {
-//                                 ...discData,
-//                                 isAvailableInNLForm: "true",
-//                             }
-//                             break
-//                         case false:
-//                             updatedState = {
-//                                 ...discData,
-//                                 isAvailableInNLForm: "false",
-//                             }
-//                     }
+// ;
                     console.log("updatedState: ")
 
                     // console.log(updatedState);

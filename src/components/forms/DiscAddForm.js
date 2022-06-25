@@ -219,7 +219,6 @@ function DiscAddForm({preloadedValues}) {
                     <div className="radio-btn-option">
                         <label className="radio">
                             <input className={errors.isReusableForm && 'field-error'}
-                                   checked={preloadedValues.isReusableForm === "true"}
                                {...register("isReusableForm",
                                    {required: "Kies een optie"})} type="radio" value="true"/>
                             Ja</label>
@@ -227,7 +226,6 @@ function DiscAddForm({preloadedValues}) {
                     <div className="radio-btn-option">
                         <label className="radio">
                         <input className={errors.isReusableForm && 'field-error'}
-                               checked={isReusable ? true : ""}
                                {...register("isReusableForm",
                                    {required: "Kies een optie"})} type="radio" value="false"/>
                             Nee</label>
