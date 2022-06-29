@@ -1,6 +1,7 @@
 import React, {createContext, useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import jwtDecode from "jwt-decode";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -26,6 +27,7 @@ function AuthContextProvider({children}) {
                 username: decodedToken.sub,
             }
         });
+        getData(decodedToken.sub, token)
         navigate("/profiel");
     }
 
@@ -38,6 +40,24 @@ function AuthContextProvider({children}) {
         });
         navigate('/');
     }
+
+    async function getData(id, token) {
+        try {
+            console.log(token);
+            console.log(id);
+            const response = await axios.get(`http://localhost:8080/users/${id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    }
+
+
 
     const contextData = {
         auth: auth.isAuth,

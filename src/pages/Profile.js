@@ -4,6 +4,7 @@ import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamb
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
 import {AuthContext} from "../context/AuthContext";
+import axios from "axios";
 
 function Profile({headerImageHandler, pageTitleHandler}) {
 const { user: { username }} = useContext(AuthContext);
@@ -12,6 +13,7 @@ const { user: { username }} = useContext(AuthContext);
         headerImageHandler(pageImg);
         pageTitleHandler("Profielpagina");
     } ,[]);
+
 
     return (
         <>
