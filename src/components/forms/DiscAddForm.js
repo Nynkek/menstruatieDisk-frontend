@@ -4,7 +4,7 @@ import axios from "axios";
 import "./form.css";
 
 
-function DiscAddForm({preloadedValues}) {
+function DiscAddForm({preloadedValues, postLink}) {
     const {register, formState: {errors}, handleSubmit} = useForm({defaultValues: preloadedValues});
     const [discData, setDiscData] = useState({});
     const [addSuccess, toggleAddSuccess] = useState(false)
@@ -83,7 +83,6 @@ function DiscAddForm({preloadedValues}) {
         }
 
 
-
         // if (image.size > 1024) {
         //     onFileSelectError({error: "File size cannot exceed more than 1MB"})
         // } else {
@@ -91,7 +90,7 @@ function DiscAddForm({preloadedValues}) {
         // }
 
         try {
-            const response = await axios.post("http://localhost:8080/pendingdiscs/addDisc", {
+            const response = await axios.post({postLink}, {
                 createdDate: createdDate,
                 name: name,
                 brand: brand,
@@ -133,7 +132,8 @@ function DiscAddForm({preloadedValues}) {
                            id="details-name"
                            {...register("nameForm", {maxLength: 80})} />
                 </label>
-                {errors.nameForm && <p className="error-label">{errors.nameForm.message}</p>}<label htmlFor="details-brand">Merk
+                {errors.nameForm && <p className="error-label">{errors.nameForm.message}</p>}<label
+                htmlFor="details-brand">Merk
                 <input type="text" placeholder="Merknaam"
                        id="details-brand"
                        className={errors.brandForm && 'field-error'}
@@ -215,21 +215,22 @@ function DiscAddForm({preloadedValues}) {
                 </label>
                 {errors.rimWidthForm && <p className="error-label">{errors.rimWidthForm.message}</p>}
                 <div className="radio-container">
-                <span className="label">Is herbruikbaar</span>
+                    <span className="label">Is herbruikbaar</span>
                     <div className="radio-btn-option">
                         <label className="radio">
                             <input className={errors.isReusableForm && 'field-error'}
-                               {...register("isReusableForm",
-                                   {required: "Kies een optie"})} type="radio" value="true"/>
+                                   {...register("isReusableForm",
+                                       {required: "Kies een optie"})} type="radio" value="true"/>
                             Ja</label>
                     </div>
                     <div className="radio-btn-option">
                         <label className="radio">
-                        <input className={errors.isReusableForm && 'field-error'}
-                               {...register("isReusableForm",
-                                   {required: "Kies een optie"})} type="radio" value="false"/>
+                            <input className={errors.isReusableForm && 'field-error'}
+                                   {...register("isReusableForm",
+                                       {required: "Kies een optie"})} type="radio" value="false"/>
                             Nee</label>
-                    </div></div>
+                    </div>
+                </div>
                 {errors.isReusableForm && <p className="error-label">{errors.isReusableForm.message}</p>}
 
 
@@ -260,7 +261,8 @@ function DiscAddForm({preloadedValues}) {
                                    {...register("hasStemForm",
                                        {required: "Kies een optie"})} type="radio" value="false"/>
                             Nee</label>
-                    </div></div>
+                    </div>
+                </div>
                 {errors.hasStemForm && <p className="error-label">{errors.hasStemForm.message}</p>}
 
                 <label htmlFor="details-shape">Vorm
@@ -324,7 +326,8 @@ function DiscAddForm({preloadedValues}) {
                                    {...register("isAvailableInNLForm",
                                        {required: "Kies een optie"})} type="radio" value="false"/>
                             Nee</label>
-                    </div></div>
+                    </div>
+                </div>
                 {errors.isAvailableInNLForm && <p className="error-label">{errors.isAvailableInNLForm.message}</p>}
 
                 <label htmlFor="details-material">Gemaakt van?
@@ -332,8 +335,8 @@ function DiscAddForm({preloadedValues}) {
                         id="details-material"
                         className={errors.materialForm && 'field-error'}
                         {...register("materialForm", {required: "Veld mag niet leeg zijn."})}>
-                        <option value="polymer">polymer</option>
-                        <option value=" silicone">silicone</option>
+                        <option value="POLYMER">polymer</option>
+                        <option value="SILICONE">silicone</option>
                         <option value="anders">anders</option>
                     </select>
                 </label>

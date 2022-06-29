@@ -5,7 +5,7 @@ import "./twoColumn5050.css";
 function TwoColumn({children}) {
 
     return (
-        <div className="columnContainer page-content ">
+        <div className="columnContainer page-content">
         { children }
         </div>
     );

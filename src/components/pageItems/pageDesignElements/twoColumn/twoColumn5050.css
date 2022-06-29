@@ -1,6 +1,4 @@
-.columnCountContainer {
-    column-count: 2;
-}
+
 .columnContainer {
     display: flex;
     align-items: flex-start;
@@ -11,7 +9,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-    .columnCountContainer {
-        column-count: 1;
+    .columnContainer {
+        flex-direction: column;
     }
 }

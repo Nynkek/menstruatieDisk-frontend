@@ -21,7 +21,7 @@ function AddDisc({headerImageHandler, pageTitleHandler}) {
                 <p>Heb je vragen neem dan contact op. ▤ ▥ ▦ ▧ ▨ ▩ </p>
             </TextContainer>
             <YellowContentBox>
-                <DiscAddForm/>
+                <DiscAddForm postLink="http://localhost:8080/pendingdiscs/addDisc"/>
             </YellowContentBox>
 
         </>

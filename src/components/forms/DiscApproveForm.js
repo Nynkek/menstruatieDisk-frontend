@@ -8,26 +8,6 @@ function DiscApproveForm({pendingDiscId, teksttest}) {
     const [discId, setDiscId] = useState(10);
     const [discData, setDiscData] = useState(null);
 
-    // const preloadedValues = {
-    //     createdDateForm: "test",
-    //     nameForm: "test",
-    //     brandForm: "test",
-    //     modelForm: "test",
-    //     widthForm: "test",
-    //     capacityForm: "test",
-    //     rimWidthForm: "test",
-    //     isReusableForm: "test",
-    //     hasStemForm: "test",
-    //     designFeatureForm: "test",
-    //     shapeForm: "test",
-    //     firmnessForm: "test",
-    //     linkToReviewForm: "test",
-    //     linkToStoreForm: "test",
-    //     imageForm: "test",
-    //     isAvailableInNLForm: "test",
-    //     materialForm: "test",
-    //     usernameForm: "test",
-    // }
 
     useEffect(() => {
 
@@ -57,15 +37,7 @@ function DiscApproveForm({pendingDiscId, teksttest}) {
                         materialForm: response.data.material,
                         // usernameForm: response.data.username,
                     });
-                    console.log("discData1: ")
-                    console.log(discData)
-// ;
-                    console.log("updatedState: ")
 
-                    // console.log(updatedState);
-                    // setDiscData(updatedState);
-                    console.log("discData 2: ")
-                    console.log(discData);
 
                 } catch (error) {
                     console.error("een error met data ophalen", error);
@@ -76,16 +48,12 @@ function DiscApproveForm({pendingDiscId, teksttest}) {
             fetchData();
         }, []
     )
-
-    console.log("hier komt het weer")
-    console.log(discData);
-    console.log("dit was het");
-
+;
 
     return (
         <div>
             {teksttest}
-            {discData ? <DiscAddForm preloadedValues={discData}/> : <div>Loading...</div>}
+            {discData ? <DiscAddForm preloadedValues={discData} postLink="http://localhost:8080/discs/addDisc"/> : <div>Loading...</div>}
         </div>
     );
 }

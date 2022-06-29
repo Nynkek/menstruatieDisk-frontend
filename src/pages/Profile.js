@@ -32,6 +32,7 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                 <p>Terug naar de <Link to="/">Homepagina</Link></p>
             </TextContainer>
 
+        {/*if is admin show lijst van pending discs*/}
 
         </>
     );
