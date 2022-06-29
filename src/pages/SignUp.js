@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, Navigate, Redirect, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import pageImg
     from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
@@ -12,12 +12,11 @@ function SignUp({headerImageHandler, pageTitleHandler}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [addSucces, toggleAddSuccess] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         headerImageHandler(pageImg);
         pageTitleHandler("Registreren van een account");
-    }, []);
+    }, [headerImageHandler, pageTitleHandler]);
 
     const [users, setUsers] = useState([]);
 

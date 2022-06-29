@@ -1,0 +1,148 @@
+.discAddForm form, .discAddForm label {
+    display: flex;
+    flex-direction: column;
+}
+
+.discAddForm .radio {
+    display: initial;
+    /*flex-direction: row;*/
+}
+
+.discAddForm .checkbox {
+    display: revert;
+    margin-top: 2ch;
+    margin-bottom: 2ch;
+}
+
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: var(--margin);
+    margin-bottom: var(--margin);
+    cursor: pointer;
+    font-size: 1em;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.discAddForm .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: var(--white);
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox:hover input ~ .checkmark {
+    background-color: var(--orange);
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox input:checked ~ .checkmark {
+    background-color: var(--orange);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--black);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.discAddForm .checkbox input:checked {
+    border: 6px solid var(--black);
+    background-color: var(--bluegreen);
+}
+
+.discAddForm input[type=text], .discAddForm input[type=number], .discAddForm input[type=url], .discAddForm select, .discAddForm textarea, .discAddForm input[type=datetime-local] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 1em;
+    border-radius: 0px;
+}
+
+.discAddForm .field-error {
+    border: 2px solid var(--red);
+}
+
+
+.discAddForm label:hover {
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.discAddForm .radio input {
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--black);
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    /*margin-left: 5px;*/
+    position: relative;
+    top: 4px;
+}
+
+.discAddForm input:checked {
+    border: 6px solid var(--black);
+    background-color: var(--pink);
+}
+
+.radio-btn-option {
+    width: 20ch;
+}
+
+.label {
+    margin-left: 1ch;
+}
+
+.radio {
+    padding-right: 10ch;
+    padding-left: 2ch;
+}
+
+.radio-container {
+    margin-bottom: 2ch;
+    margin-top: 2ch;
+}
+
+.error-label {
+    color: var(--red);
+    margin-left: 2ch;
+}
+
+.error-label:before {
+    content: "↑";
+    margin-right: 1ch;
+}
