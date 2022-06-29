@@ -1,11 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
+import {AuthContext} from "../context/AuthContext";
 
 function Profile({headerImageHandler, pageTitleHandler}) {
-
+const { user: { username }} = useContext(AuthContext);
 
     useEffect(() => {
         headerImageHandler(pageImg);
@@ -21,7 +22,7 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                 <section>
                     <h2>Gegevens</h2>
                     <p><strong>Gebruikersnaam:</strong> hardcoded-test</p>
-                    <p><strong>Email:</strong> hardcoded@test.com</p>
+                    <p><strong>Email:</strong> {username}</p>
                 </section>
             </YellowContentBox>
 

@@ -26,11 +26,11 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
         setPassword(e.password);
         console.log(e.username, e.password);
         try {
-            const response = await axios.post(`http://localhost:8080/users/${name}`, {
-                username: name,
-                password: password,
+            const response = await axios.post('http://localhost:8080/authenticate', {
+                username: e.username,
+                password: e.password,
             },);
-            console.log(response);
+            login(response.data.jwt);
             toggleAddSuccess(true);
         } catch (error) {
             console.error('There was an error!', error);
@@ -69,20 +69,7 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
                     </label>
                     {errors.password && <p>{errors.password.message}</p>}<br/>
 
-
-                    {auth === false ?
-                        <button type="button"
-                                onClick={login}
-                        >
-                            Login
-                        </button> :
-                        <button
-                            type="button"
-                            onClick={logout}
-                        >
-                            Uitloggen
-                        </button>
-                    }
+                        <button type="submit">Login</button>
                 </fieldset>
             </form>
 
