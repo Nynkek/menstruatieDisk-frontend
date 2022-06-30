@@ -5,7 +5,7 @@ import "./form.css";
 import DiscAddForm from "./DiscAddForm";
 import {AuthContext} from "../../context/AuthContext";
 
-function DiscApproveForm({pendingDiscId, teksttest}) {
+function DiscApproveForm({pendingDiscId}) {
     const [discId, setDiscId] = useState(10);
     const [discData, setDiscData] = useState(null);
     const {user: {username}, token} = useContext(AuthContext);
@@ -15,13 +15,7 @@ function DiscApproveForm({pendingDiscId, teksttest}) {
 
             async function fetchData() {
                 try {
-                    const response = await axios.get(`http://localhost:8080/pendingdiscs/${discId}`,
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${token}`,
-                            }
-                        });
+                    const response = await axios.get(`http://localhost:8080/pendingdiscs/${pendingDiscId}`);
                     console.log("response.data: ")
                     console.log(response.data);
                     // setDiscData(response.data);
@@ -60,7 +54,7 @@ function DiscApproveForm({pendingDiscId, teksttest}) {
     return (
         <div>
             <p>Hey {username}!</p>
-            {teksttest}
+
             {discData ? <DiscAddForm preloadedValues={discData} postLink="http://localhost:8080/discs/addDisc"/> :
                 <div>Loading...</div>}
         </div>

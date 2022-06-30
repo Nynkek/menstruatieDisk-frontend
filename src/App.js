@@ -58,7 +58,7 @@ function App() {
                 <Route path="/disk-toevoegen"
                         element={<AddDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
-                <Route path="/disk-accepteren"
+                <Route path="/disk-accepteren/:discId"
                        element={<ApproveDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
             </Routes>
             <Footer/>

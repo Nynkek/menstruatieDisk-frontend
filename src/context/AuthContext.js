@@ -29,16 +29,13 @@ function AuthContextProvider({children}) {
                 status: 'done',
             });
         }
-
-
     }, [])
 
 
     function login(token) {
         const decodedToken = jwtDecode(token);
         localStorage.setItem('token', token);
-
-        getData(decodedToken.sub, token, "/profiel")
+        getData(decodedToken.sub, token, "/profiel");
     }
 
     function logout(e) {
