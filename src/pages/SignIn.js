@@ -16,6 +16,7 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
     const navigate = useNavigate();
     const {register, formState: {errors}, handleSubmit} = useForm({mode: 'onBlur'});
     const source = axios.CancelToken.source();
+    const [error, setError] = useState(false);
 
 
     useEffect(() => {
@@ -44,6 +45,7 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
             toggleAddSuccess(true);
         } catch (error) {
             console.error('There was an error!', error);
+            setError(true);
         }
         ;
     }
@@ -53,8 +55,8 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
             <YellowContentBox>
                 {!auth ?
                     <form onSubmit={handleSubmit(signIn)}>
-                        <fieldset>
-                            <legend>Gegevens</legend>
+
+                            <h3 className="legend">Gegevens</h3>
                             <label htmlFor="details-username">
                                 Naam:
                                 <input
@@ -73,7 +75,7 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
                             <label htmlFor="details-password">
                                 Wachtwoord:
                                 <input
-                                    type="text"
+                                    type="password"
                                     id="details-password"
                                     {...register("password")}
                                     placeholder="wachtwoord"
@@ -82,10 +84,11 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
                             {errors.password && <p>{errors.password.message}</p>}<br/>
 
                             <button type="submit">Login</button>
-                        </fieldset>
+
                     </form>
                     : <button type="button" onClick={logout}>Log uit</button>
                 }
+                {error && "Er ging iets mis, controleer je gegevens en probeer het nog een keer."}
             </YellowContentBox>
             <section className="page-content">
                 <p>Heb je nog geen account? <Link to="/registreren" exact>Registreer</Link> je dan eerst.</p>

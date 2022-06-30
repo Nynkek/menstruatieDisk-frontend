@@ -33,13 +33,15 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                 setUserData(response.data);
                 response.data.authorities.map((userRole) => {
                     if (userRole.authority === "ROLE_ADMIN") {
-                        toggleIsAdmin(true);
+                        return toggleIsAdmin(true);
                     }
+
                 })
             } catch (error) {
                 console.error('There was an error!', error);
             }
         }
+
         getData(username, token);
         return function cleanup() {
             source.cancel();
@@ -60,7 +62,8 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                     });
                 console.log(response.data)
                 setPendingDiscList(response.data.map((disc) => {
-                    return <li key={disc.id}><Link to={`/disk-accepteren#${disc.id}`}>{disc.brand} <strong>{disc.name}</strong> - {disc.model}</Link> ({disc.createdDate})</li>
+                        return <li key={disc.id}><Link to={`/disk-accepteren#${disc.id}`}>{disc.brand}
+                            <strong> {disc.name}</strong> - {disc.model}</Link> ({disc.createdDate})</li>
                     })
                 )
             } catch (error) {

@@ -11,6 +11,13 @@ function Tabel() {
     const [reusable, setReusable] = useState('');
     const [stem, setStem] = useState('');
     const [selectedOption, setSelectedOption] = useState()
+    const source = axios.CancelToken.source();
+
+    useEffect(() => {
+        return function cleanup() {
+            source.cancel();
+        }
+    }, []);
 
     useEffect(() => {
         axios.get("http://localhost:8080/discs/")
