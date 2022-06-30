@@ -9,6 +9,7 @@ function AuthContextProvider({children}) {
     const [auth, toggleAuth] = useState({
         isAuth: false,
         user: null,
+        token: null,
     });
     let navigate = useNavigate();
 
@@ -25,9 +26,10 @@ function AuthContextProvider({children}) {
             isAuth: true,
             user: {
                 username: decodedToken.sub,
-            }
+            },
+            token: token,
         });
-        getData(decodedToken.sub, token)
+        // getData(decodedToken.sub, token)
         navigate("/profiel");
     }
 
@@ -37,6 +39,7 @@ function AuthContextProvider({children}) {
         toggleAuth({
             isAuth: false,
             user: null,
+            token: null,
         });
         navigate('/');
     }
@@ -52,6 +55,7 @@ function AuthContextProvider({children}) {
                 }
             });
             console.log(response.data);
+
         } catch (error) {
             console.error('There was an error!', error);
         }
@@ -64,6 +68,7 @@ function AuthContextProvider({children}) {
         user: auth.user,
         login: login,
         logout: logout,
+        token: auth.token,
     }
 
     return (
