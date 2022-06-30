@@ -82,7 +82,7 @@
     background-color: var(--bluegreen);
 }
 
-.discAddForm input[type=text], .discAddForm input[type=number], .discAddForm input[type=url], .discAddForm select, .discAddForm textarea, .discAddForm input[type=datetime-local] {
+input[type=text], input[type=password], .discAddForm input[type=number], .discAddForm input[type=url], .discAddForm select, .discAddForm textarea, .discAddForm input[type=datetime-local] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -91,12 +91,11 @@
     border-radius: 0px;
 }
 
-.discAddForm .field-error {
+.field-error {
     border: 2px solid var(--red);
 }
 
-
-.discAddForm label:hover {
+label:hover {
     font-weight: bolder;
     cursor: pointer;
 }

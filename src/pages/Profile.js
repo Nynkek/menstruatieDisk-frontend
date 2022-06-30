@@ -9,9 +9,10 @@ import axios from "axios";
 
 function Profile({headerImageHandler, pageTitleHandler}) {
     const [userData, setUserData] = useState();
-    const {user: {username}, token} = useContext(AuthContext);
+    const {user: {username}} = useContext(AuthContext);
     const [isAdmin, toggleIsAdmin] = useState(false);
     const [pendingDiscList, setPendingDiscList] = useState();
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         headerImageHandler(pageImg);
@@ -19,6 +20,8 @@ function Profile({headerImageHandler, pageTitleHandler}) {
     }, [headerImageHandler, pageTitleHandler]);
 
     useEffect(() => {
+        const source = axios.CancelToken.source();
+
         async function getData(id, token) {
             try {
                 const response = await axios.get(`http://localhost:8080/users/${id}`, {
@@ -28,25 +31,21 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                     }
                 });
                 setUserData(response.data);
-                console.log(response.data.authorities);
-
                 response.data.authorities.map((userRole) => {
                     if (userRole.authority === "ROLE_ADMIN") {
                         toggleIsAdmin(true);
                     }
-                    console.log(userRole);
-                    console.log(isAdmin);
                 })
-                console.log(isAdmin);
             } catch (error) {
                 console.error('There was an error!', error);
             }
         }
-
         getData(username, token);
+        return function cleanup() {
+            source.cancel();
+        }
 
-
-    }, [username]);
+    }, []);
 
 
     useEffect(() => {

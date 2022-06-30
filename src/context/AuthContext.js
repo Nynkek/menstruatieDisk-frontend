@@ -1,7 +1,9 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import nav from "../components/pageItems/header/nav/Nav";
+import isTokenValid from "../helpers/isTokenValid";
 
 export const AuthContext = createContext(null);
 
@@ -9,42 +11,49 @@ function AuthContextProvider({children}) {
     const [auth, toggleAuth] = useState({
         isAuth: false,
         user: null,
-        token: null,
+        status: 'pending',
     });
     let navigate = useNavigate();
 
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (token && isTokenValid(token)) {
+            const decodedToken = jwtDecode(token);
+            getData(decodedToken.sub, token);
+        } else {
+            toggleAuth({
+                isAuth: false,
+                user: null,
+                status: 'done',
+            });
+        }
+
+
+    }, [])
+
+
     function login(token) {
-        console.log(token);
         const decodedToken = jwtDecode(token);
-
-        console.log("Gebruiker is ingelogd");
-        console.log(decodedToken);
-
         localStorage.setItem('token', token);
 
-        toggleAuth( {
-            isAuth: true,
-            user: {
-                username: decodedToken.sub,
-            },
-            token: token,
-        });
-        // getData(decodedToken.sub, token)
-        navigate("/profiel");
+        getData(decodedToken.sub, token, "/profiel")
     }
 
     function logout(e) {
+        localStorage.clear();
         e.preventDefault();
         console.log("de gebruiker is uitgelogd");
         toggleAuth({
             isAuth: false,
             user: null,
-            token: null,
+            status: 'done',
         });
         navigate('/');
     }
 
-    async function getData(id, token) {
+    async function getData(id, token, redirectUrl) {
         try {
             console.log(token);
             console.log(id);
@@ -55,12 +64,23 @@ function AuthContextProvider({children}) {
                 }
             });
             console.log(response.data);
+            toggleAuth({
+                ...auth,
+                isAuth: true,
+                user: {
+                    username: response.data.username,
+                },
+                status: 'done',
+            });
+            if (redirectUrl) {
+                navigate(redirectUrl);
+            }
 
         } catch (error) {
             console.error('There was an error!', error);
+            localStorage.clear();
         }
     }
-
 
 
     const contextData = {
@@ -68,12 +88,11 @@ function AuthContextProvider({children}) {
         user: auth.user,
         login: login,
         logout: logout,
-        token: auth.token,
     }
 
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {auth.status === 'done' ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     );
 }
