@@ -30,10 +30,6 @@ label {
     line-height: 1.5rem;
 }
 
-.tabel label:hover {
-    font-weight: bolder;
-    cursor: pointer;
-}
 
 .tabel input {
     appearance: none;
@@ -52,7 +48,7 @@ label {
     background-color: var(--pink);
 }
 
-.legend {
+.legend, legend {
     color: var(--black);
     background-color: var(--orange);
     padding: 5px 10px;

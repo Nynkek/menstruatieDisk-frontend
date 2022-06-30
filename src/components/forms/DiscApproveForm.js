@@ -1,19 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import "./form.css";
 import DiscAddForm from "./DiscAddForm";
+import {AuthContext} from "../../context/AuthContext";
 
 function DiscApproveForm({pendingDiscId, teksttest}) {
     const [discId, setDiscId] = useState(10);
     const [discData, setDiscData] = useState(null);
+    const {user: {username}, token} = useContext(AuthContext);
 
 
     useEffect(() => {
 
             async function fetchData() {
                 try {
-                    const response = await axios.get(`http://localhost:8080/pendingdiscs/${discId}`);
+                    const response = await axios.get(`http://localhost:8080/pendingdiscs/${discId}`,
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                            }
+                        });
                     console.log("response.data: ")
                     console.log(response.data);
                     // setDiscData(response.data);
@@ -42,18 +50,19 @@ function DiscApproveForm({pendingDiscId, teksttest}) {
                 } catch (error) {
                     console.error("een error met data ophalen", error);
                 }
-                ;
             }
 
             fetchData();
         }, []
     )
-;
+    ;
 
     return (
         <div>
+            <p>Hey {username}!</p>
             {teksttest}
-            {discData ? <DiscAddForm preloadedValues={discData} postLink="http://localhost:8080/discs/addDisc"/> : <div>Loading...</div>}
+            {discData ? <DiscAddForm preloadedValues={discData} postLink="http://localhost:8080/discs/addDisc"/> :
+                <div>Loading...</div>}
         </div>
     );
 }

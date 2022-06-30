@@ -3,7 +3,7 @@ import pageImg
     from '../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg'
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
 import axios from "axios";
-import Tabel from "./Tabel";
+import Tabel from "../components/tabel/Tabel";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
 import TwoColumn5050 from "../components/pageItems/pageDesignElements/twoColumn/twoColumn50-50";
 import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";

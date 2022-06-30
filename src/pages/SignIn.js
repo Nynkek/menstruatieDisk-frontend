@@ -15,10 +15,19 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
     const [addSucces, toggleAddSuccess] = useState(false);
     const navigate = useNavigate();
     const {register, formState: {errors}, handleSubmit} = useForm({mode: 'onBlur'});
+    const source = axios.CancelToken.source();
+    const [error, setError] = useState(false);
+
 
     useEffect(() => {
         headerImageHandler(pageImg);
         pageTitleHandler("Inloggen");
+    }, []);
+
+    useEffect(() => {
+        return function cleanup() {
+            source.cancel();
+        }
     }, []);
 
     async function signIn(e) {
@@ -26,73 +35,67 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
         setPassword(e.password);
         console.log(e.username, e.password);
         try {
-            const response = await axios.post(`http://localhost:8080/users/${name}`, {
-                username: name,
-                password: password,
-            },);
-            console.log(response);
+            const response = await axios.post('http://localhost:8080/authenticate', {
+                username: e.username,
+                password: e.password,
+            }, {
+                cancelToken: source.token,
+            });
+            login(response.data.jwt);
             toggleAddSuccess(true);
         } catch (error) {
             console.error('There was an error!', error);
-        };
+            setError(true);
+        }
+        ;
     }
 
     return (
         <>
-        <YellowContentBox>
-            <form onSubmit={handleSubmit(signIn)}>
-                <fieldset>
-                    <legend>Gegevens</legend>
-                    <label htmlFor="details-username">
-                        Naam:
-                        <input
-                            type="text"
-                            id="details-username"
-                            {...register("username", {
-                                required: "Username mag niet leeg zijn.",
-                            })}
-                            placeholder="username"
+            <YellowContentBox>
+                {!auth ?
+                    <form onSubmit={handleSubmit(signIn)}>
 
-                        />
-                    </label>
-                    {errors.username && <p>{errors.username.message}</p>}
-                    <br/>
+                            <h3 className="legend">Gegevens</h3>
+                            <label htmlFor="details-username">
+                                Naam:
+                                <input
+                                    type="text"
+                                    id="details-username"
+                                    {...register("username", {
+                                        required: "Username mag niet leeg zijn.",
+                                    })}
+                                    placeholder="username"
 
-                    <label htmlFor="details-password">
-                        Wachtwoord:
-                        <input
-                            type="text"
-                            id="details-password"
-                            {...register("password")}
-                            placeholder="wachtwoord"
-                        />
-                    </label>
-                    {errors.password && <p>{errors.password.message}</p>}<br/>
+                                />
+                            </label>
+                            {errors.username && <p>{errors.username.message}</p>}
+                            <br/>
 
+                            <label htmlFor="details-password">
+                                Wachtwoord:
+                                <input
+                                    type="password"
+                                    id="details-password"
+                                    {...register("password")}
+                                    placeholder="wachtwoord"
+                                />
+                            </label>
+                            {errors.password && <p>{errors.password.message}</p>}<br/>
 
-                    {auth === false ?
-                        <button type="button"
-                                onClick={login}
-                        >
-                            Login
-                        </button> :
-                        <button
-                            type="button"
-                            onClick={logout}
-                        >
-                            Uitloggen
-                        </button>
-                    }
-                </fieldset>
-            </form>
+                            <button type="submit">Login</button>
 
-        </YellowContentBox>
-    <section className="page-content">
-        <p>Heb je nog geen account? <Link to="/registreren" exact>Registreer</Link> je dan eerst.</p>
-    </section>
-</>
-)
-    ;
+                    </form>
+                    : <button type="button" onClick={logout}>Log uit</button>
+                }
+                {error && "Er ging iets mis, controleer je gegevens en probeer het nog een keer."}
+            </YellowContentBox>
+            <section className="page-content">
+                <p>Heb je nog geen account? <Link to="/registreren" exact>Registreer</Link> je dan eerst.</p>
+            </section>
+        </>
+    )
+        ;
 }
 
 export default SignIn;
