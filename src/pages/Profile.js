@@ -62,7 +62,7 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                     });
                 console.log(response.data)
                 setPendingDiscList(response.data.map((disc) => {
-                        return <li key={disc.id}><Link to={`/disk-accepteren#${disc.id}`}>{disc.brand}
+                        return <li key={disc.id}><Link to={`/disk-accepteren/${disc.id}`}>{disc.brand}
                             <strong> {disc.name}</strong> - {disc.model}</Link> ({disc.createdDate})</li>
                     })
                 )
@@ -98,9 +98,9 @@ function Profile({headerImageHandler, pageTitleHandler}) {
 
             {isAdmin &&
                 <TextContainer>
-                    <h2>{pendingDiscList.length} disks om goed te keuren</h2>
+                    <h2>{pendingDiscList && pendingDiscList.length} disks om goed te keuren</h2>
                     Je bent admin, dus we gaan je hier alle pending discs tonen.
-                    <ul>{pendingDiscList}</ul>
+                    <ul>{pendingDiscList && pendingDiscList}</ul>
                 </TextContainer>
             }
 

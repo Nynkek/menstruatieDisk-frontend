@@ -429,3 +429,7 @@ button:active {
   margin-left: 0.2em;
   content: "→";
 }
+
+.bigFont {
+  font-size: 8rem;
+}
