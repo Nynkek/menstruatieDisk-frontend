@@ -53,9 +53,9 @@ function DiscApproveForm({pendingDiscId}) {
 
     return (
         <div>
-            <p>Hey {username}!</p>
+            <p>Hey {username}, succes met deze disk controleren!</p>
 
-            {discData ? <DiscAddForm preloadedValues={discData} postLink="http://localhost:8080/discs/addDisc"/> :
+            {discData ? <DiscAddForm preloadedValues={discData} postLink="discs/addDisc"/> :
                 <div>Loading...</div>}
         </div>
     );

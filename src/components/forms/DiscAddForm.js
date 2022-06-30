@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import "./form.css";
+import {AuthContext} from "../../context/AuthContext";
+import getTodaysDate from "../../helpers/getTodaysDate";
 
 
 function DiscAddForm({preloadedValues, postLink}) {
     const {register, formState: {errors}, handleSubmit} = useForm({defaultValues: preloadedValues});
+    const {user: {username}} = useContext(AuthContext);
     const [discData, setDiscData] = useState({});
     const [addSuccess, toggleAddSuccess] = useState(false)
     const [createdDate, setCreatedDate] = useState('');
@@ -15,16 +18,18 @@ function DiscAddForm({preloadedValues, postLink}) {
     const [width, setWidth] = useState('');
     const [capacity, setCapacity] = useState('');
     const [rimWidth, setRimWidth] = useState('');
-    const [isReusable, toggleIsReusable] = useState(false);
-    const [hasStem, toggleHasStem] = useState(false);
+    const [isReusable, toggleIsReusable] = useState(null);
+    const [hasStem, toggleHasStem] = useState(null);
     const [designFeature, setDesignFeature] = useState('');
     const [shape, setShape] = useState('');
     const [firmness, setFirmness] = useState('');
     const [linkToStore, setLinkToStore] = useState('');
     const [linkToReview, setLinkToReview] = useState('');
     const [image, setImage] = useState('');
-    const [isAvailableInNL, toggleIsAvailableInNL] = useState(false);
-    const [material, setMaterial] = useState(0);
+    const [isAvailableInNL, toggleIsAvailableInNL] = useState(null);
+    const [material, setMaterial] = useState(null);
+    const [addedBy, setAddedBy] = useState('');
+    const todaysDate = getTodaysDate();
 
 
     // const formData = new FormData();
@@ -34,82 +39,31 @@ function DiscAddForm({preloadedValues, postLink}) {
     // https://www.pluralsight.com/guides/how-to-use-a-simple-form-submit-with-files-in-react
 
 
+
+
     async function onSubmit(e) {
-        setCreatedDate(e.createdDateForm)
-        setName(e.nameForm);
-        setBrand(e.brandForm);
-        setModel(e.modelForm);
-        setWidth(e.widthForm);
-        setCapacity(e.capacityForm);
-        setRimWidth(e.rimWidthForm);
-        setDesignFeature(e.designFeatureForm);
-        setShape(e.shapeForm);
-        setFirmness(e.firmnessForm);
-        setLinkToReview(e.linkToReviewForm);
-        setLinkToStore(e.linkToStoreForm);
-        setImage(e.imageForm[0]);
-
-        switch (e.materialForm) {
-            case "silicone":
-                setMaterial(0);
-                break;
-            case "polymer":
-                setMaterial(1);
-                break
-            case "anders":
-            default:
-        }
-
-        switch (e.hasStemForm) {
-            case "true":
-                toggleHasStem(true);
-                break
-            case "false":
-                toggleHasStem(false);
-        }
-        switch (e.isReusableForm) {
-            case "true":
-                toggleIsReusable(true);
-                break
-            case "false":
-                toggleIsReusable(false);
-        }
-        switch (e.isAvailableInNLForm) {
-            case "true":
-                toggleIsAvailableInNL(true);
-                break
-            case "false":
-                toggleIsAvailableInNL(false);
-        }
-
-
-        // if (image.size > 1024) {
-        //     onFileSelectError({error: "File size cannot exceed more than 1MB"})
-        // } else {
-        //     onFileSelectSuccess(file)
-        // }
-
         try {
-            const response = await axios.post({postLink}, {
-                createdDate: createdDate,
-                name: name,
-                brand: brand,
-                model: model,
-                width: width,
-                capacity: capacity,
-                rimWidth: rimWidth,
-                isReusable: isReusable,
-                hasStem: hasStem,
-                designFeature: designFeature,
-                shape: shape,
-                firmness: firmness,
-                linkToStore: linkToStore,
-                linkToReview: linkToReview,
-                image: image,
-                isAvailableInNL: isAvailableInNL,
-                material: material,
+            const response = await axios.post(`http://localhost:8080/${postLink}`, {
+                createdDate: todaysDate,
+                name: e.nameForm,
+                brand: e.brandForm,
+                model: e.modelForm,
+                width: e.widthForm,
+                capacity: e.capacityForm,
+                rimWidth: e.rimWidthForm,
+                isReusable: e.isReusableForm === "true" ? true : false,
+                hasStem: e.hasStemForm === "true" ? true : false,
+                designFeature: e.designFeatureForm,
+                shape: e.shapeForm,
+                firmness: e.firmnessForm,
+                linkToStore: e.linkToStoreForm,
+                linkToReview: e.linkToReviewForm,
+                // image: e.imageForm[0],
+                isAvailableInNL: e.isAvailableInNLForm === "true" ? true : false,
+                material: e.materialForm === "SILICONE" ? "0" : "1",
+                addedBy: username,
             },);
-            console.log(response.data);
+
             console.log("als het goed is is de disk verstuurd...");
             toggleAddSuccess(true);
             // navigate("/inloggen");
@@ -119,6 +73,14 @@ function DiscAddForm({preloadedValues, postLink}) {
 
     }
 
+
+    // if (image.size > 1024) {
+    //     onFileSelectError({error: "File size cannot exceed more than 1MB"})
+    // } else {
+    //     onFileSelectSuccess(file)
+    // }
+
+    console.log(window.location.pathname);
     return (
         <div className="discAddForm">
 
@@ -337,29 +299,15 @@ function DiscAddForm({preloadedValues, postLink}) {
                         {...register("materialForm", {required: "Veld mag niet leeg zijn."})}>
                         <option value="POLYMER">polymer</option>
                         <option value="SILICONE">silicone</option>
-                        <option value="anders">anders</option>
                     </select>
                 </label>
                 {errors.materialForm && <p className="error-label">{errors.materialForm.message}</p>}
-                <label htmlFor="details-createdDate">Verstuurd op
-                    <input type="datetime-local" placeholder="Datum"
-                           id="details-createdDate"
-                           pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
-                           className={errors.createdDateForm && 'field-error'}
-                           {...register("createdDateForm", {})} />
-                </label>
-                {errors.createdDateForm && <p className="error-label">{errors.createdDateForm.message}</p>}
-                <label htmlFor="details-username">Wie?
-                    <input type="text"
-                           placeholder="Wie verstuurt dit formulier?"
-                           id="details-username"
-                           className={errors.usernameForm && 'field-error'}
-                           {...register("usernameForm", {})} />
-                </label>
-                {errors.usernameForm && <p className="error-label">{errors.usernameForm.message}</p>}
-                <button type="submit">Verstuur disk-gegevens</button>
+
+                <button type="submit">Verstuur disk-gegevens als {username}</button>
             </form>
-            {addSuccess === true && <p>Disc is verstuurd ter goedkeuring! Je mag de pagina sluiten.</p>}
+
+             {addSuccess === true &&
+                <p>Disc is verstuurd door {username} op {todaysDate}</p>}
 
         </div>
     );
