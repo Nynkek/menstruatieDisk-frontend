@@ -34,10 +34,9 @@ function DiscApproveForm({pendingDiscId}) {
                         firmnessForm: response.data.firmness,
                         linkToReviewForm: response.data.linkToStore,
                         linkToStoreForm: response.data.linkToReview,
-                        imageForm: response.data.image,
                         isAvailableInNLForm: response.data.isAvailableInNL ? "true" : "false",
                         materialForm: response.data.material,
-                        // usernameForm: response.data.username,
+                        imageForm: response.data.image.url
                     });
 
 

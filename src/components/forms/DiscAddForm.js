@@ -7,33 +7,28 @@ import getTodaysDate from "../../helpers/getTodaysDate";
 
 
 function DiscAddForm({preloadedValues, postLink}) {
-    const {register, formState: {errors}, handleSubmit} = useForm({defaultValues: preloadedValues});
+    const {register, formState: {errors}, watch, handleSubmit} = useForm({defaultValues: preloadedValues});
     const {user: {username}} = useContext(AuthContext);
     const [addSuccess, toggleAddSuccess] = useState(false);
-    const [file, setFile] = useState([]);
     const [previewUrl, setPreviewUrl] = useState('');
+    const [onFileSelectError] = useState();
     const [error, setError] = useState(false);
     const todaysDate = getTodaysDate();
+    const imageFormValue = watch("imageForm"); // "test-input"
 
 
-    // const formData = new FormData();
-    //
-    // formData.append("name", name);
-    // formData.append("file", selectedFile);
-    // https://www.pluralsight.com/guides/how-to-use-a-simple-form-submit-with-files-in-react
 
-    // function handleImageChange(e) {
-    //     // Sla het gekozen bestand op
-    //     const uploadedFile = e.target.files[0];
-    //     console.log(uploadedFile);
-    //     // Sla het gekozen bestand op in de state
-    //     setFile(uploadedFile);
-    //     // Sla de preview URL op zodat we deze kunnen laten zien in een <img>
-    //     setPreviewUrl(URL.createObjectURL(uploadedFile));
-// }
-
+    // function onImageChange(e) {
+    //     setPreviewUrl(URL.createObjectURL(e.target.files[0]));
+    //     console.log(URL.createObjectURL(e.target.files[0]));
+    //     console.log("on change");
+    //     // if (e.target.files[0].size > 1024) {
+    //     //     return setPreviewUrl("File size cannot exceed more than 1MB");
+    //     // }
+    // }
 
     async function onSubmit(e) {
+        // Sla het gekozen bestand op
         const formData = new FormData();
         // Voeg daar ons bestand uit de state aan toe onder de key "file"
         formData.append("image", e.imageForm[0]);
@@ -65,9 +60,6 @@ function DiscAddForm({preloadedValues, postLink}) {
 
             console.log("als het goed is is de disk verstuurd...");
 
-
-            // verstuur ons formData object en geef in de header aan dat het om een form-data type gaat
-            // Let op: we wijzigen nu ALTIJD de afbeelding voor student 1001, als je een andere student wil kiezen of dit dynamisch wil maken, pas je de url aan!
             const result = await axios.post(`http://localhost:8080/pendingdiscs/${discAddedId}/photo`, formData,
                 {
                     headers: {
@@ -77,6 +69,8 @@ function DiscAddForm({preloadedValues, postLink}) {
             console.log(result.data);
 
             toggleAddSuccess(true);
+            setError(false);
+            HTMLFormElement.reset();
 
 
             // navigate("/inloggen");
@@ -87,14 +81,7 @@ function DiscAddForm({preloadedValues, postLink}) {
 
     }
 
-
-    // if (image.size > 1024) {
-    //     onFileSelectError({error: "File size cannot exceed more than 1MB"})
-    // } else {
-    //     onFileSelectSuccess(file)
-    // }
-
-    console.log(window.location.pathname);
+    console.log(imageFormValue);
     return (
         <div className="discAddForm">
 
@@ -208,8 +195,6 @@ function DiscAddForm({preloadedValues, postLink}) {
                     </div>
                 </div>
                 {errors.isReusableForm && <p className="error-label">{errors.isReusableForm.message}</p>}
-
-
                 <label htmlFor="details-designFeature">Opvallende design-keuzes?
                     <textarea
                         id="details-designFeature"
@@ -220,8 +205,6 @@ function DiscAddForm({preloadedValues, postLink}) {
                         })} />
                 </label>
                 {errors.designFeatureForm && <p className="error-label">{errors.designFeatureForm.message}</p>}
-
-
                 <div className="radio-container">
                     <span className="label">Heeft steeltje, lusje of touwtje?</span>
                     <div className="radio-btn-option">
@@ -240,7 +223,6 @@ function DiscAddForm({preloadedValues, postLink}) {
                     </div>
                 </div>
                 {errors.hasStemForm && <p className="error-label">{errors.hasStemForm.message}</p>}
-
                 <label htmlFor="details-shape">Vorm
                     <input type="text" placeholder="Rond, ovaal, andere vorm?"
                            id="details-shape"
@@ -255,6 +237,7 @@ function DiscAddForm({preloadedValues, postLink}) {
                     <select
                         id="details-firmness"
                         className={errors.firmnessForm && 'field-error'}
+                        defaultValue="medium"
                         {...register("firmnessForm",
                             {required: "Veld mag niet leeg zijn."})}>
                         <option value="zacht">zacht</option>
@@ -281,20 +264,27 @@ function DiscAddForm({preloadedValues, postLink}) {
                 {errors.linkToReviewForm && <p className="error-label">{errors.linkToReviewForm.message}</p>}
 
 
+
+
                 <label htmlFor="details-image">Kies afbeelding
                     <input type="file" placeholder="Afbeelding"
                            id="details-image"
                            className={errors.imageForm && 'field-error'}
-                           {...register("imageForm", {})} />
+
+                           {...register("imageForm")}
+                    />
                 </label>
-                {previewUrl &&
+
+                {imageFormValue.length > 0 &&
                     <label>
                         Preview:
-                        <img src={previewUrl} alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                        <img src={URL.createObjectURL(imageFormValue.item(0))} alt="Voorbeeld van de afbeelding die zojuist gekozen is"
                              className="image-preview"/>
                     </label>
                 }
                 {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
+
+
 
                 <div className="radio-container">
                     <span className="label">Is in een Nederlandse (web)winkel te koop?</span>
