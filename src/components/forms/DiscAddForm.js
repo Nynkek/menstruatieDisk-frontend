@@ -9,26 +9,10 @@ import getTodaysDate from "../../helpers/getTodaysDate";
 function DiscAddForm({preloadedValues, postLink}) {
     const {register, formState: {errors}, handleSubmit} = useForm({defaultValues: preloadedValues});
     const {user: {username}} = useContext(AuthContext);
-    const [discData, setDiscData] = useState({});
-    const [addSuccess, toggleAddSuccess] = useState(false)
-    const [createdDate, setCreatedDate] = useState('');
-    const [name, setName] = useState('');
-    const [brand, setBrand] = useState('');
-    const [model, setModel] = useState('');
-    const [width, setWidth] = useState('');
-    const [capacity, setCapacity] = useState('');
-    const [rimWidth, setRimWidth] = useState('');
-    const [isReusable, toggleIsReusable] = useState(null);
-    const [hasStem, toggleHasStem] = useState(null);
-    const [designFeature, setDesignFeature] = useState('');
-    const [shape, setShape] = useState('');
-    const [firmness, setFirmness] = useState('');
-    const [linkToStore, setLinkToStore] = useState('');
-    const [linkToReview, setLinkToReview] = useState('');
-    const [image, setImage] = useState('');
-    const [isAvailableInNL, toggleIsAvailableInNL] = useState(null);
-    const [material, setMaterial] = useState(null);
-    const [addedBy, setAddedBy] = useState('');
+    const [addSuccess, toggleAddSuccess] = useState(false);
+    const [file, setFile] = useState([]);
+    const [previewUrl, setPreviewUrl] = useState('');
+    const [error, setError] = useState(false);
     const todaysDate = getTodaysDate();
 
 
@@ -38,10 +22,23 @@ function DiscAddForm({preloadedValues, postLink}) {
     // formData.append("file", selectedFile);
     // https://www.pluralsight.com/guides/how-to-use-a-simple-form-submit-with-files-in-react
 
-
+    // function handleImageChange(e) {
+    //     // Sla het gekozen bestand op
+    //     const uploadedFile = e.target.files[0];
+    //     console.log(uploadedFile);
+    //     // Sla het gekozen bestand op in de state
+    //     setFile(uploadedFile);
+    //     // Sla de preview URL op zodat we deze kunnen laten zien in een <img>
+    //     setPreviewUrl(URL.createObjectURL(uploadedFile));
+// }
 
 
     async function onSubmit(e) {
+        const formData = new FormData();
+        // Voeg daar ons bestand uit de state aan toe onder de key "file"
+        formData.append("image", e.imageForm[0]);
+
+
         try {
             const response = await axios.post(`http://localhost:8080/${postLink}`, {
                 createdDate: todaysDate,
@@ -64,11 +61,28 @@ function DiscAddForm({preloadedValues, postLink}) {
                 addedBy: username,
             });
             console.log(response.data);
+            const discAddedId = response.data.id;
+
             console.log("als het goed is is de disk verstuurd...");
+
+
+            // verstuur ons formData object en geef in de header aan dat het om een form-data type gaat
+            // Let op: we wijzigen nu ALTIJD de afbeelding voor student 1001, als je een andere student wil kiezen of dit dynamisch wil maken, pas je de url aan!
+            const result = await axios.post(`http://localhost:8080/pendingdiscs/${discAddedId}/photo`, formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    },
+                })
+            console.log(result.data);
+
             toggleAddSuccess(true);
+
+
             // navigate("/inloggen");
         } catch (error) {
             console.error('There was an error!', error);
+            setError(true);
         }
 
     }
@@ -265,12 +279,21 @@ function DiscAddForm({preloadedValues, postLink}) {
                            {...register("linkToReviewForm", {maxLength: 800})} />
                 </label>
                 {errors.linkToReviewForm && <p className="error-label">{errors.linkToReviewForm.message}</p>}
-                <label htmlFor="details-image">Afbeelding URL
+
+
+                <label htmlFor="details-image">Kies afbeelding
                     <input type="file" placeholder="Afbeelding"
                            id="details-image"
                            className={errors.imageForm && 'field-error'}
                            {...register("imageForm", {})} />
                 </label>
+                {previewUrl &&
+                    <label>
+                        Preview:
+                        <img src={previewUrl} alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                             className="image-preview"/>
+                    </label>
+                }
                 {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
 
                 <div className="radio-container">
@@ -306,8 +329,10 @@ function DiscAddForm({preloadedValues, postLink}) {
                 <button type="submit">Verstuur disk-gegevens als {username}</button>
             </form>
 
-             {addSuccess === true &&
+            {addSuccess === true &&
                 <p>Disc is verstuurd door {username} op {todaysDate}</p>}
+            {error === true &&
+                <p>Hey {username}, er is iets mis gegaan. Probeer het opnieuw.</p>}
 
         </div>
     );
