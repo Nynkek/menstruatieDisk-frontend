@@ -6,26 +6,14 @@ import {AuthContext} from "../../context/AuthContext";
 import getTodaysDate from "../../helpers/getTodaysDate";
 
 
-function DiscAddForm({preloadedValues, postLink}) {
+function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
     const {register, formState: {errors}, watch, handleSubmit} = useForm({defaultValues: preloadedValues});
     const {user: {username}} = useContext(AuthContext);
     const [addSuccess, toggleAddSuccess] = useState(false);
-    const [previewUrl, setPreviewUrl] = useState('');
-    const [onFileSelectError] = useState();
     const [error, setError] = useState(false);
     const todaysDate = getTodaysDate();
-    const imageFormValue = watch("imageForm"); // "test-input"
+    const imageFormValue = watch("imageForm");
 
-
-
-    // function onImageChange(e) {
-    //     setPreviewUrl(URL.createObjectURL(e.target.files[0]));
-    //     console.log(URL.createObjectURL(e.target.files[0]));
-    //     console.log("on change");
-    //     // if (e.target.files[0].size > 1024) {
-    //     //     return setPreviewUrl("File size cannot exceed more than 1MB");
-    //     // }
-    // }
 
     async function onSubmit(e) {
         // Sla het gekozen bestand op
@@ -70,7 +58,7 @@ function DiscAddForm({preloadedValues, postLink}) {
 
             toggleAddSuccess(true);
             setError(false);
-            HTMLFormElement.reset();
+            // HTMLFormElement.reset();
 
 
             // navigate("/inloggen");
@@ -81,7 +69,6 @@ function DiscAddForm({preloadedValues, postLink}) {
 
     }
 
-    console.log(imageFormValue);
     return (
         <div className="discAddForm">
 
@@ -275,12 +262,27 @@ function DiscAddForm({preloadedValues, postLink}) {
                     />
                 </label>
 
-                {imageFormValue.length > 0 &&
-                    <label>
-                        Preview:
+
+
+                {imageFormValue ?
+                    <>
+                    {imageFormValue.length > 0 &&
+
+                        <p>Preview:<br/>
                         <img src={URL.createObjectURL(imageFormValue.item(0))} alt="Voorbeeld van de afbeelding die zojuist gekozen is"
-                             className="image-preview"/>
-                    </label>
+                             className="image-preview"/></p>
+
+                }</>
+                :<>
+                    {preloadedImage &&
+
+                        <p>Preview:<br/>
+                        <img src={preloadedImage}
+                             alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                             className="image-preview"/></p>
+
+                }
+                    </>
                 }
                 {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
 
