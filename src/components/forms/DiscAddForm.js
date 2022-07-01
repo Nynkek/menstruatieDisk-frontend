@@ -62,8 +62,8 @@ function DiscAddForm({preloadedValues, postLink}) {
                 isAvailableInNL: e.isAvailableInNLForm === "true" ? true : false,
                 material: e.materialForm === "SILICONE" ? "0" : "1",
                 addedBy: username,
-            },);
-
+            });
+            console.log(response.data);
             console.log("als het goed is is de disk verstuurd...");
             toggleAddSuccess(true);
             // navigate("/inloggen");
