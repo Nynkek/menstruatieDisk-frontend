@@ -56,10 +56,10 @@ function App() {
                        element={<Donate headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
                 <Route path="/disk-toevoegen"
-                        element={<AddDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
+                        element={<PrivateRoute><AddDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/></PrivateRoute>}/>
 
                 <Route path="/disk-accepteren/:discId"
-                       element={<ApproveDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
+                       element={<PrivateRoute><ApproveDisc headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/></PrivateRoute>}/>
             </Routes>
             <Footer/>
         </div>

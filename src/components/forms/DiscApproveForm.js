@@ -8,6 +8,7 @@ import {AuthContext} from "../../context/AuthContext";
 function DiscApproveForm({pendingDiscId}) {
     const [discId, setDiscId] = useState(10);
     const [discData, setDiscData] = useState(null);
+    const [pendingDiscImage, setPendingDiscImage] = useState('');
     const {user: {username}, token} = useContext(AuthContext);
 
 
@@ -18,6 +19,7 @@ function DiscApproveForm({pendingDiscId}) {
                     const response = await axios.get(`http://localhost:8080/pendingdiscs/${pendingDiscId}`);
                     console.log("response.data: ")
                     console.log(response.data);
+                    setPendingDiscImage(response.data.image.url);
                     // setDiscData(response.data);
                     setDiscData({
                         createdDateForm: response.data.createdData,
@@ -34,10 +36,9 @@ function DiscApproveForm({pendingDiscId}) {
                         firmnessForm: response.data.firmness,
                         linkToReviewForm: response.data.linkToStore,
                         linkToStoreForm: response.data.linkToReview,
-                        imageForm: response.data.image,
                         isAvailableInNLForm: response.data.isAvailableInNL ? "true" : "false",
                         materialForm: response.data.material,
-                        // usernameForm: response.data.username,
+                        // imageForm: response.data.image.url
                     });
 
 
@@ -55,7 +56,7 @@ function DiscApproveForm({pendingDiscId}) {
         <div>
             <p>Hey {username}, succes met deze disk controleren!</p>
 
-            {discData ? <DiscAddForm preloadedValues={discData} postLink="discs/addDisc"/> :
+            {discData ? <DiscAddForm preloadedValues={discData} preloadedImage={pendingDiscImage} postLink="discs/addDisc"/> :
                 <div>Loading...</div>}
         </div>
     );

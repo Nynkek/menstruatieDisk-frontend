@@ -6,42 +6,22 @@ import {AuthContext} from "../../context/AuthContext";
 import getTodaysDate from "../../helpers/getTodaysDate";
 
 
-function DiscAddForm({preloadedValues, postLink}) {
-    const {register, formState: {errors}, handleSubmit} = useForm({defaultValues: preloadedValues});
+function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
+    const {register, formState: {errors}, watch, handleSubmit} = useForm({defaultValues: preloadedValues});
     const {user: {username}} = useContext(AuthContext);
-    const [discData, setDiscData] = useState({});
-    const [addSuccess, toggleAddSuccess] = useState(false)
-    const [createdDate, setCreatedDate] = useState('');
-    const [name, setName] = useState('');
-    const [brand, setBrand] = useState('');
-    const [model, setModel] = useState('');
-    const [width, setWidth] = useState('');
-    const [capacity, setCapacity] = useState('');
-    const [rimWidth, setRimWidth] = useState('');
-    const [isReusable, toggleIsReusable] = useState(null);
-    const [hasStem, toggleHasStem] = useState(null);
-    const [designFeature, setDesignFeature] = useState('');
-    const [shape, setShape] = useState('');
-    const [firmness, setFirmness] = useState('');
-    const [linkToStore, setLinkToStore] = useState('');
-    const [linkToReview, setLinkToReview] = useState('');
-    const [image, setImage] = useState('');
-    const [isAvailableInNL, toggleIsAvailableInNL] = useState(null);
-    const [material, setMaterial] = useState(null);
-    const [addedBy, setAddedBy] = useState('');
+    const [addSuccess, toggleAddSuccess] = useState(false);
+    const [error, setError] = useState(false);
     const todaysDate = getTodaysDate();
-
-
-    // const formData = new FormData();
-    //
-    // formData.append("name", name);
-    // formData.append("file", selectedFile);
-    // https://www.pluralsight.com/guides/how-to-use-a-simple-form-submit-with-files-in-react
-
-
+    const imageFormValue = watch("imageForm");
 
 
     async function onSubmit(e) {
+        // Sla het gekozen bestand op
+        const formData = new FormData();
+        // Voeg daar ons bestand uit de state aan toe onder de key "file"
+        formData.append("image", e.imageForm[0]);
+
+
         try {
             const response = await axios.post(`http://localhost:8080/${postLink}`, {
                 createdDate: todaysDate,
@@ -64,23 +44,31 @@ function DiscAddForm({preloadedValues, postLink}) {
                 addedBy: username,
             });
             console.log(response.data);
+            const discAddedId = response.data.id;
+
             console.log("als het goed is is de disk verstuurd...");
+
+            const result = await axios.post(`http://localhost:8080/pendingdiscs/${discAddedId}/photo`, formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    },
+                })
+            console.log(result.data);
+
             toggleAddSuccess(true);
+            setError(false);
+            // HTMLFormElement.reset();
+
+
             // navigate("/inloggen");
         } catch (error) {
             console.error('There was an error!', error);
+            setError(true);
         }
 
     }
 
-
-    // if (image.size > 1024) {
-    //     onFileSelectError({error: "File size cannot exceed more than 1MB"})
-    // } else {
-    //     onFileSelectSuccess(file)
-    // }
-
-    console.log(window.location.pathname);
     return (
         <div className="discAddForm">
 
@@ -194,8 +182,6 @@ function DiscAddForm({preloadedValues, postLink}) {
                     </div>
                 </div>
                 {errors.isReusableForm && <p className="error-label">{errors.isReusableForm.message}</p>}
-
-
                 <label htmlFor="details-designFeature">Opvallende design-keuzes?
                     <textarea
                         id="details-designFeature"
@@ -206,8 +192,6 @@ function DiscAddForm({preloadedValues, postLink}) {
                         })} />
                 </label>
                 {errors.designFeatureForm && <p className="error-label">{errors.designFeatureForm.message}</p>}
-
-
                 <div className="radio-container">
                     <span className="label">Heeft steeltje, lusje of touwtje?</span>
                     <div className="radio-btn-option">
@@ -226,7 +210,6 @@ function DiscAddForm({preloadedValues, postLink}) {
                     </div>
                 </div>
                 {errors.hasStemForm && <p className="error-label">{errors.hasStemForm.message}</p>}
-
                 <label htmlFor="details-shape">Vorm
                     <input type="text" placeholder="Rond, ovaal, andere vorm?"
                            id="details-shape"
@@ -241,6 +224,7 @@ function DiscAddForm({preloadedValues, postLink}) {
                     <select
                         id="details-firmness"
                         className={errors.firmnessForm && 'field-error'}
+                        defaultValue="medium"
                         {...register("firmnessForm",
                             {required: "Veld mag niet leeg zijn."})}>
                         <option value="zacht">zacht</option>
@@ -265,13 +249,44 @@ function DiscAddForm({preloadedValues, postLink}) {
                            {...register("linkToReviewForm", {maxLength: 800})} />
                 </label>
                 {errors.linkToReviewForm && <p className="error-label">{errors.linkToReviewForm.message}</p>}
-                <label htmlFor="details-image">Afbeelding URL
+
+
+
+
+                <label htmlFor="details-image">Kies afbeelding
                     <input type="file" placeholder="Afbeelding"
                            id="details-image"
                            className={errors.imageForm && 'field-error'}
-                           {...register("imageForm", {})} />
+
+                           {...register("imageForm")}
+                    />
                 </label>
+
+
+
+                {imageFormValue ?
+                    <>
+                    {imageFormValue.length > 0 &&
+
+                        <p>Preview:<br/>
+                        <img src={URL.createObjectURL(imageFormValue.item(0))} alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                             className="image-preview"/></p>
+
+                }</>
+                :<>
+                    {preloadedImage &&
+
+                        <p>Preview:<br/>
+                        <img src={preloadedImage}
+                             alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                             className="image-preview"/></p>
+
+                }
+                    </>
+                }
                 {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
+
+
 
                 <div className="radio-container">
                     <span className="label">Is in een Nederlandse (web)winkel te koop?</span>
@@ -306,8 +321,10 @@ function DiscAddForm({preloadedValues, postLink}) {
                 <button type="submit">Verstuur disk-gegevens als {username}</button>
             </form>
 
-             {addSuccess === true &&
+            {addSuccess === true &&
                 <p>Disc is verstuurd door {username} op {todaysDate}</p>}
+            {error === true &&
+                <p>Hey {username}, er is iets mis gegaan. Probeer het opnieuw.</p>}
 
         </div>
     );

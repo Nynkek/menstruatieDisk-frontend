@@ -433,3 +433,7 @@ button:active {
 .bigFont {
   font-size: 8rem;
 }
+
+.image-preview {
+  width: 100px;
+}
