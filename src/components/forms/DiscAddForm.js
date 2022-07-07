@@ -8,7 +8,7 @@ import getTodaysDate from "../../helpers/getTodaysDate";
 
 function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
     const {register, formState: {errors}, watch, handleSubmit} = useForm({defaultValues: preloadedValues});
-    const {user: {username}} = useContext(AuthContext);
+    const {user: {username}, token} = useContext(AuthContext);
     const [addSuccess, toggleAddSuccess] = useState(false);
     const [error, setError] = useState(false);
     const todaysDate = getTodaysDate();
@@ -24,25 +24,32 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
 
         try {
             const response = await axios.post(`http://localhost:8080/${postLink}`, {
-                createdDate: todaysDate,
-                name: e.nameForm,
-                brand: e.brandForm,
-                model: e.modelForm,
-                width: e.widthForm,
-                capacity: e.capacityForm,
-                rimWidth: e.rimWidthForm,
-                isReusable: e.isReusableForm === "true" ? true : false,
-                hasStem: e.hasStemForm === "true" ? true : false,
-                designFeature: e.designFeatureForm,
-                shape: e.shapeForm,
-                firmness: e.firmnessForm,
-                linkToStore: e.linkToStoreForm,
-                linkToReview: e.linkToReviewForm,
-                // image: e.imageForm[0],
-                isAvailableInNL: e.isAvailableInNLForm === "true" ? true : false,
-                material: e.materialForm === "SILICONE" ? "0" : "1",
-                addedBy: username,
-            });
+                    createdDate: todaysDate,
+                    name: e.nameForm,
+                    brand: e.brandForm,
+                    model: e.modelForm,
+                    width: e.widthForm,
+                    capacity: e.capacityForm,
+                    rimWidth: e.rimWidthForm,
+                    isReusable: e.isReusableForm === "true" ? true : false,
+                    hasStem: e.hasStemForm === "true" ? true : false,
+                    designFeature: e.designFeatureForm,
+                    shape: e.shapeForm,
+                    firmness: e.firmnessForm,
+                    linkToStore: e.linkToStoreForm,
+                    linkToReview: e.linkToReviewForm,
+                    // image: e.imageForm[0],
+                    isAvailableInNL: e.isAvailableInNLForm === "true" ? true : false,
+                    material: e.materialForm === "SILICONE" ? "0" : "1",
+                    addedBy: username,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                }
+            );
             console.log(response.data);
             const discAddedId = response.data.id;
 
@@ -251,8 +258,6 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                 {errors.linkToReviewForm && <p className="error-label">{errors.linkToReviewForm.message}</p>}
 
 
-
-
                 <label htmlFor="details-image">Kies afbeelding
                     <input type="file" placeholder="Afbeelding"
                            id="details-image"
@@ -263,29 +268,28 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                 </label>
 
 
-
                 {imageFormValue ?
                     <>
-                    {imageFormValue.length > 0 &&
+                        {imageFormValue.length > 0 &&
 
-                        <p>Preview:<br/>
-                        <img src={URL.createObjectURL(imageFormValue.item(0))} alt="Voorbeeld van de afbeelding die zojuist gekozen is"
-                             className="image-preview"/></p>
+                            <p>Preview:<br/>
+                                <img src={URL.createObjectURL(imageFormValue.item(0))}
+                                     alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                                     className="image-preview"/></p>
 
-                }</>
-                :<>
-                    {preloadedImage &&
+                        }</>
+                    : <>
+                        {preloadedImage &&
 
-                        <p>Preview:<br/>
-                        <img src={preloadedImage}
-                             alt="Voorbeeld van de afbeelding die zojuist gekozen is"
-                             className="image-preview"/></p>
+                            <p>Preview:<br/>
+                                <img src={preloadedImage}
+                                     alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                                     className="image-preview"/></p>
 
-                }
+                        }
                     </>
                 }
                 {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
-
 
 
                 <div className="radio-container">

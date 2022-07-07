@@ -25,6 +25,8 @@ function Tabel() {
                 setMenstrualDiscs(response.data);
                 setFilteredDiscs(response.data)
                 console.log(menstrualDiscs.data);
+                console.log(response.data[0].image.fileName);
+
             }).catch(error => {
             console.error('There was an error!', error);
         });
@@ -39,7 +41,7 @@ function Tabel() {
             sortable: true,
             compact: true,
             width: "80px",
-            cell: row => <img height="53px" width="83px" alt={row.name} src={row.image}/>,
+            cell: row => <img height="53px" width="83px" alt={row.image.fileName} src={row.image.url}/>,
 
         },
         {

@@ -16,10 +16,16 @@ function DiscApproveForm({pendingDiscId}) {
 
             async function fetchData() {
                 try {
-                    const response = await axios.get(`http://localhost:8080/pendingdiscs/${pendingDiscId}`);
+                    const response = await axios.get(`http://localhost:8080/pendingdiscs/${pendingDiscId}`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        }});
                     console.log("response.data: ")
                     console.log(response.data);
-                    setPendingDiscImage(response.data.image.url);
+                    if (response.data.image === ! null) {
+                        setPendingDiscImage(response.data.image.url);
+                    }
                     // setDiscData(response.data);
                     setDiscData({
                         createdDateForm: response.data.createdData,
@@ -56,7 +62,8 @@ function DiscApproveForm({pendingDiscId}) {
         <div>
             <p>Hey {username}, succes met deze disk controleren!</p>
 
-            {discData ? <DiscAddForm preloadedValues={discData} preloadedImage={pendingDiscImage} postLink="discs/addDisc"/> :
+            {discData ?
+                <DiscAddForm preloadedValues={discData} preloadedImage={pendingDiscImage} postLink="discs/addDisc"/> :
                 <div>Loading...</div>}
         </div>
     );
