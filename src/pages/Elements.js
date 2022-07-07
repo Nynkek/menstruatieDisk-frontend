@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import pageImg from "../assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
-import {Link} from "react-router-dom";
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
 import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
 import TwoColumnWithImg from "../components/pageItems/pageDesignElements/twoColumn/TwoColumnWithImg";

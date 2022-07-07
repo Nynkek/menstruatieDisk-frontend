@@ -77,7 +77,9 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
                                 <input
                                     type="password"
                                     id="details-password"
-                                    {...register("password")}
+                                    {...register("password", {
+                                        required: "Username mag niet leeg zijn."
+                                    })}
                                     placeholder="wachtwoord"
                                 />
                             </label>

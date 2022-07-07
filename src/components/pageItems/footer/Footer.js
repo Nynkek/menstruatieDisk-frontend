@@ -13,13 +13,11 @@ function Footer() {
                 <div className="footer-menu">
                     <h3>Meer info</h3>
                     <ul>
-                        <li><Link to="/">home</Link></li>
                         <li><Link to="/faq">faq</Link></li>
                         <li><Link to="/privacy-policy">privacy policy</Link></li>
                         <li><Link to="/contact">over Nynke</Link></li>
                         {auth ? <li><Link to="/inloggen">Uitloggen</Link></li> : <li><Link to="/inloggen">Inloggen</Link></li>}
                         {auth && <li><Link to="/profiel">Profiel</Link></li>}
-                        {auth && <li><Link to="/disk-toevoegen">Disc toevoegen</Link></li>}
                     </ul>
                 </div>
                 <div className="footer-txt">

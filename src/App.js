@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import {Routes, Route, useLocation } from 'react-router-dom'
+import {useLayoutEffect, useState} from 'react'
 import './App.css';
-import {Route, Routes} from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import Information from "./pages/Information";
@@ -23,11 +23,20 @@ import Elements from "./pages/Elements";
 
 
 function App() {
-
     const [headerImage, setHeaderImage] = useState(headerImg);
     const [pageTitle, setPageTitle] = useState("Menstruatiedisk");
 
+    const Wrapper = ({children}) => {
+        const location = useLocation();
+        useLayoutEffect(() => {
+            document.documentElement.scrollTo(0, 0);
+        }, [location.pathname]);
+        return children
+    }
+
+
     return (
+        <Wrapper>
         <div className="container">
             <Header headerImage={headerImage} pageTitle={pageTitle}/>
 
@@ -72,6 +81,7 @@ function App() {
             </Routes>
             <Footer/>
         </div>
+        </Wrapper>
     );
 }
 
