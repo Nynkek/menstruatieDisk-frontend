@@ -4,7 +4,7 @@ function HeaderImage({headerImage, pageTitle}) {
     return (
         <div className="header-img-container">
             <figure>
-                <img src={headerImage} className="header-img"/>
+                <img src={headerImage} className="header-img" alt={pageTitle} />
             </figure>
             <div className="page-title">
                 <h1>{pageTitle}</h1>

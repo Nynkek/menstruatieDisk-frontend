@@ -17,6 +17,9 @@ import PrivateRoute from "./components/pageItems/privateRoute/PrivateRoute";
 import Footer from "./components/pageItems/footer/Footer";
 import AddDisc from "./pages/AddDisc";
 import ApproveDisc from "./pages/ApproveDisc";
+import Faq from "./pages/Faq";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Elements from "./pages/Elements";
 
 
 function App() {
@@ -37,17 +40,23 @@ function App() {
                 <Route path="/vergelijk-meerdere-menstruatiedisks/"
                        element={<Compare headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
+                <Route path="/faq/"
+                       element={<Faq headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
+
+                <Route path="/privacy-policy/"
+                       element={<PrivacyPolicy headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
                 <Route path="/contact/"
                        element={<Contact headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
+                <Route path="/design-elementen/"
+                       element={<Elements headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
+
                 <Route path="/registreren/"
                        element={<SignUp headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
 
-
                 <Route path="/inloggen"
                        element={<SignIn headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/>}/>
-
 
                 <Route path="/profiel/"
                               element={<PrivateRoute><Profile headerImageHandler={setHeaderImage} pageTitleHandler={setPageTitle}/></PrivateRoute>}/>
