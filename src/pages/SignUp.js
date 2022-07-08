@@ -1,49 +1,46 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
 import pageImg
     from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
 
 function SignUp({headerImageHandler, pageTitleHandler}) {
     const {register, formState: {errors}, handleSubmit} = useForm({mode: 'onBlur'});
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [addSucces, toggleAddSuccess] = useState(false);
     const [error, setError] = useState(false);
     const source = axios.CancelToken.source();
+    let navigate = useNavigate();
+
 
     useEffect(() => {
         headerImageHandler(pageImg);
         pageTitleHandler("Registreren van een account");
     }, [headerImageHandler, pageTitleHandler]);
 
-    useEffect(() => {
-        return function cleanup() {
-            source.cancel();
-        }
-    }, []);
+    // useEffect(() => {
+    //     return function cleanup() {
+    //         source.cancel();
+    //     }
+    // }, []);
 
     const [users, setUsers] = useState([]);
 
     async function addUser(e) {
-        setName(e.username);
-        setPassword(e.password);
-        setEmail(e.emailAdress);
+
         console.log(e.username, e.emailAdress, e.password);
         try {
             const response = await axios.post("http://localhost:8080/users/createUser/", {
-                username: name,
-                password: password,
-                emailAdress: email,
+                username: e.username,
+                password: e.password,
+                emailAdress: e.emailAdress,
             }, {
                 cancelToken: source.token,
             });
             toggleAddSuccess(true);
-            // navigate("/inloggen");
+            navigate("/inloggen");
         } catch (error) {
             console.error('There was an error!', error);
             setError(true);

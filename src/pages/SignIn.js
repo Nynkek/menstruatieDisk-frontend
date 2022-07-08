@@ -24,15 +24,16 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
         pageTitleHandler("Inloggen");
     }, []);
 
-    useEffect(() => {
-        return function cleanup() {
-            source.cancel();
-        }
-    }, []);
+    // useEffect(() => {
+    //     return function cleanup() {
+    //         source.cancel();
+    //     }
+    // }, []);
 
     async function signIn(e) {
-        setName(e.username);
-        setPassword(e.password);
+        // e.preventDefault(e);
+        // setName(e.username);
+        // setPassword(e.password);
         console.log(e.username, e.password);
         try {
             const response = await axios.post('http://localhost:8080/authenticate', {
