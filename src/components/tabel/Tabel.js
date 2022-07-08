@@ -41,8 +41,15 @@ function Tabel() {
             sortable: true,
             compact: true,
             width: "80px",
-            cell: row => <img height="53px" width="83px" alt={row.image.fileName} src={row.image.url}/>,
-
+            cell: row => {
+                if (row.image) {
+                    return <img height="53px" width="83px" alt={row.image.fileName}
+                                src={row.image.url}/>
+                } else {
+                    return <img height="53px" width="83px" alt="disc"
+                                src="https://cupkiezer.nl/wp-content/uploads/2018/10/Belladot_evelina_small_m_box_pouch.jpg"/>
+                }
+            }
         },
         {
             name: 'Name',

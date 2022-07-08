@@ -92,6 +92,10 @@ function SignUp({headerImageHandler, pageTitleHandler}) {
                                     message: "Je emailadres mag maximaal 80 karakters bevatten",
                                 },
                                 required: "Veld mag niet leeg zijn",
+                                pattern: {
+                                    value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                    message: "Geen geldig e-mailadres"
+                                }
                             })}
                         />
                     </label>
@@ -105,6 +109,10 @@ function SignUp({headerImageHandler, pageTitleHandler}) {
                             {...register("password",
                                 {
                                     required: "veld mag niet leeg zijn",
+                                    minLength: {
+                                        value: 8,
+                                        message: "Je wachtwoord moet minimaal 8 karakters bevatten",
+                                    }
                                 })}
                         />
                     </label>
