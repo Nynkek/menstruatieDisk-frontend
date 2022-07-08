@@ -79,7 +79,7 @@ function SignIn({headerImageHandler, pageTitleHandler}) {
                                     type="password"
                                     id="details-password"
                                     {...register("password", {
-                                        required: "Username mag niet leeg zijn."
+                                        required: "wachtwoord mag niet leeg zijn."
                                     })}
                                     placeholder="wachtwoord"
                                 />

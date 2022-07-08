@@ -145,3 +145,9 @@ label:hover {
     content: "↑";
     margin-right: 1ch;
 }
+
+.delete-btn {
+    margin: 1ch;
+    padding: 1ch;
+    background-color: var(--red);
+}

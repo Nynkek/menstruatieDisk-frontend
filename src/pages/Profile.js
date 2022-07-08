@@ -15,6 +15,7 @@ function Profile({headerImageHandler, pageTitleHandler}) {
     const [isBrand, toggleIsBrand] = useState(false);
     const [pendingDiscList, setPendingDiscList] = useState();
     const token = localStorage.getItem('token');
+    const [discDeleted, toggleDiscDeleted] = useState(false);
 
     useEffect(() => {
         headerImageHandler(pageImg);
@@ -55,6 +56,22 @@ function Profile({headerImageHandler, pageTitleHandler}) {
 
     }, []);
 
+    async function deleteDisc(discId) {
+        try {
+            const response = await axios.delete(`http://localhost:8080/pendingdiscs/delete/${discId}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                });
+
+        } catch (error) {
+            console.error("een error met data ophalen", error);
+        }
+        toggleDiscDeleted(!discDeleted);
+
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -66,10 +83,10 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                             "Authorization": `Bearer ${token}`,
                         }
                     });
-                console.log(response.data)
                 setPendingDiscList(response.data.map((disc) => {
                         return <li key={disc.id}><Link to={`/disk-accepteren/${disc.id}`}>{disc.brand}
-                            <strong> {disc.name}</strong> - {disc.model}</Link> ({disc.createdDate})</li>
+                            <strong> {disc.name}</strong> - {disc.model}</Link> ({disc.createdDate})
+                            <button className="delete-btn" onClick={() => deleteDisc(disc.id)}>Delete Pending Disk</button></li>
                     })
                 )
             } catch (error) {
@@ -79,18 +96,20 @@ function Profile({headerImageHandler, pageTitleHandler}) {
 
         fetchData();
 
-    }, [isAdmin]);
+    }, [isAdmin, discDeleted]);
 
     return (
         <>
             <TextContainer>
-                <p>Welkom op de profielpagina. Je kunt hier al je gegevens bekijken.</p> <p>Terug naar de <Link to="/">Homepagina</Link></p>
+                <p>Welkom op de profielpagina. Je kunt hier al je gegevens bekijken.</p> <p>Terug naar de <Link
+                to="/">Homepagina</Link></p>
             </TextContainer>
             <YellowContentBox>
                 <section>
                     <h2>Jouw gegevens</h2>
                     <p><strong>Gebruikersnaam:</strong> {username}</p>
                     <p><strong>Email:</strong> {userData && userData.emailAdress}</p>
+                    <p>Wil je ze aanpassen? Stuur dan een e-mail, want die functionaliteit zit er nog niet in.</p>
                 </section>
             </YellowContentBox>
 
@@ -100,26 +119,27 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                     molestias qui quo unde?</p>
 
 
-
             </TextContainer>
             {isBrand &&
                 <BookmarkBox verticalText="Merk">
                     <h2>Je eigen disk toevoegen?</h2>
-                    Je bent bevoegd om een eigen disk toe te voegen. Dit kan <Link to="/disk-toevoegen">hier</Link>.
+                    <p>Je bent bevoegd om een eigen disk toe te voegen. Dit kan <Link to="/disk-toevoegen">hier</Link>.</p>
+                    <button type="button" onClick="/disk-toevoegen">Eigen disk toevoegen</button>
                 </BookmarkBox>
             }
 
             {isAdmin &&
                 <BookmarkBox verticalText="admin">
                     <h2>{pendingDiscList && pendingDiscList.length} disks om goed te keuren</h2>
-                    Je bent admin, dus we gaan je hier alle pending discs tonen.
+                    <p>Je bent admin, dus we gaan je hier alle pending discs tonen.</p>
+                    <p>Klik op de naam van de disk om hem te accepteren of wijzigen. Klik op de delete-button ernaast om hem te verwijderen.</p>
                     <ul>{pendingDiscList && pendingDiscList}</ul>
                 </BookmarkBox>
             }
 
-    <TextContainer>
-        <button type="button" onClick={logout}>Log uit</button>
-    </TextContainer>
+            <TextContainer>
+                <button type="button" onClick={logout}>Log uit</button>
+            </TextContainer>
 
         </>
     );
