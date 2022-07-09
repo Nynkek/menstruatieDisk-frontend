@@ -7,7 +7,7 @@ import {AuthContext} from "../../context/AuthContext";
 
 function DiscApproveForm({pendingDiscId}) {
     const [discData, setDiscData] = useState(null);
-    const [pendingDiscImage, setPendingDiscImage] = useState('');
+    const [pendingDiscImage, setPendingDiscImage] = useState();
     const {user: {username}} = useContext(AuthContext);
     const token = localStorage.getItem('token');
 
@@ -22,10 +22,7 @@ function DiscApproveForm({pendingDiscId}) {
                             "Authorization": `Bearer ${token}`,
                         }
                     });
-                    console.log("response.data: ")
-                    console.log(response.data);
-
-                    if (response.data.image) {
+                    if (response.data.image && response.data.image.length > 0) {
                         setPendingDiscImage(response.data.image);
                         setDiscData({
                             createdDateForm: response.data.createdData,
@@ -47,7 +44,6 @@ function DiscApproveForm({pendingDiscId}) {
                             imageForm: response.data.image
                         });
                     } else {
-                        console.log("niet image")
                         setDiscData({
                             createdDateForm: response.data.createdData,
                             nameForm: response.data.name,
@@ -86,7 +82,7 @@ function DiscApproveForm({pendingDiscId}) {
 
             {discData ?
                 <DiscAddForm preloadedValues={discData} preloadedImage={pendingDiscImage} postLink="discs/addDisc"/> :
-                <div>Loading...</div>}
+                <div>Loading... refresh als dit te lang duurt.</div>}
         </div>
     );
 }

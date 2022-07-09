@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import pageImg from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4356.jpg";
-import {Link} from "react-router-dom";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
 
 function Donate({headerImageHandler, pageTitleHandler}) {
