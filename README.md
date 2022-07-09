@@ -1,4 +1,4 @@
-![Menstruatiedisk logo](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-screenshot-project.png?raw=true)
+![Menstruatiedisk homepage](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-screenshot-project.png?raw=true)
 
 
 # Menstruatiedisk app
@@ -55,8 +55,8 @@ Dit zijn de geconfigureerde testgebruikers. Username + wachtwoord.
 1. admin - password
 
 
-# Clone repository
-De eerste stap is het clonen van de repository. Gebruik de GitHub clone feature.
+# Installatie-handleiding
+De eerste stap is het _clonen_ van de repository. Gebruik de GitHub clone feature.
 
 Of gebruik de onderstaande informatie om de code manueel te clonen.
 - SSH: `git@github.com:Nynkek/menstruatieDisk-frontend.git`
@@ -79,3 +79,16 @@ De pagina zal automatisch herladen bij het maken van aanpassingen. Ook zie je li
 `npm run build`
 
 Bundelt de applicatie voor productie naar de `/build` folder. Dit optimaliseert React voor de beste prestatie. 
+
+# screenshots
+
+## Disks vergelijken in tabel met filteropties
+![Menstruatiedisk screenshot tabel](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-screenshot-tabel.png?raw=true)
+
+## Disk toevoegen
+![Menstruatiedisk screenshot disk toevoegen](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-screenshot-disc-toevoegen.png?raw=true)
+![Menstruatiedisk screenshot disk toevoegen](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-screenshot-disc-toevoegen2.png?raw=true)
+
+## homepage
+
+![Menstruatiedisk homepage](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-screenshot-project.png?raw=true)
