@@ -1,0 +1,83 @@
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+hr {
+    height: 0.1em;
+    border: var(--border);
+    width: 95%;
+    margin: 1em;
+}
+
+footer {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    gap: 5%;
+    margin: var(--margin);
+    flex-wrap: wrap;
+}
+.footer-menu,.footer-txt, .footer-logo {
+    margin-top: var(--margin);
+}
+
+.footer-menu {
+    flex-grow: 1;
+    max-width: 20ch;
+}
+
+.footer-txt {
+    text-align: center;
+    flex-grow: 2;
+    max-width: 40ch;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 20ch;
+}
+
+footer .logo {
+    width: 8em;
+    padding: 1em;
+    transform: rotate(-1.3deg);
+}
+
+.color-swatches {
+    display: flex;
+}
+
+.color-swatches div{
+    width: 2em;
+    height: 2em;
+    margin: 2px;
+}
+
+.footer-color-orange{
+    background-color: var(--orange);
+}
+
+.footer-color-bluegreen {
+    background-color: var(--bluegreen);
+}
+
+.footer-color-pink {
+    background-color: var(--pink);
+}
+
+.footer-color-yellow {
+    background-color: var(--yellow);
+}
+
+.footer-color-red {
+    background-color: var(--red);
+}
+
+.color-swatches div:hover {
+    border: var(--border);
+}

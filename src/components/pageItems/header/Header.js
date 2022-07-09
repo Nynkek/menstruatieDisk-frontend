@@ -3,6 +3,7 @@ import logo from '../../../assets/menstruatiedisk-logo-rood.png';
 import Nav from "./nav/Nav";
 import HeaderImage from "./headerImage/HeaderImage";
 import {useNavigate, Link} from 'react-router-dom';
+import "./header.css";
 
 
 function Header({headerImage, pageTitle}) {

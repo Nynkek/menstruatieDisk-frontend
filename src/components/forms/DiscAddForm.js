@@ -11,11 +11,9 @@ import fileValidation from "../../helpers/FileValidation";
 function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
     const {
         register,
-        formState,
-        formState: {errors, isSubmitSuccessful},
+        formState: {errors},
         watch,
-        handleSubmit,
-        reset
+        handleSubmit
     } = useForm({defaultValues: preloadedValues});
     const {user: {username}} = useContext(AuthContext);
     const [addSuccess, toggleAddSuccess] = useState(false);
@@ -26,10 +24,8 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
     const navigate = useNavigate();
 
     function showPreview() {
-        console.log(preloadedImage);
         if (imageFormValue && imageFormValue.length > 0) {
             return (
-
                 <>
                     <p><strong>Preview:</strong><br/>
                         <img src={URL.createObjectURL(imageFormValue.item(0))}
@@ -38,7 +34,7 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                     {fileValidation(imageFormValue.item(0))}
                 </>
             )
-        } else if (preloadedImage.url) {
+        } else if (preloadedImage && preloadedImage.url) {
             return (
                 <>
                     <p>Preview:<br/>
@@ -49,6 +45,7 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
             )
         }
     }
+
 
     async function onSubmit(e) {
 
@@ -81,7 +78,6 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                     }
                 }
             );
-            console.log(response.data);
             const discAddedId = response.data.id;
             const root = postLink.split('/')[0];
 
@@ -346,7 +342,10 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
             {addSuccess === true &&
                 <p>Disc is verstuurd door {username} op {todaysDate}</p>}
             {error === true &&
-                <p>Hey {username}, er is iets mis gegaan. Probeer het opnieuw.</p>}
+                <>
+                    <p>Hey {username}, er is iets mis gegaan. Probeer het opnieuw en controleer of je alle velden wel hebt ingevuld.</p>
+                </>
+            }
 
         </div>
     );
