@@ -26,6 +26,7 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
     const navigate = useNavigate();
 
     function showPreview() {
+        console.log(preloadedImage);
         if (imageFormValue && imageFormValue.length > 0) {
             return (
 
@@ -37,21 +38,21 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                     {fileValidation(imageFormValue.item(0))}
                 </>
             )
-        } else if (preloadedImage) {
+        } else if (preloadedImage.url) {
             return (
                 <>
                     <p>Preview:<br/>
-                        <img src={preloadedImage}
+                        <img src={preloadedImage.url}
                              alt="Voorbeeld van de afbeelding die zojuist gekozen is"
                              className="image-preview"/></p>
-                    {fileValidation(preloadedImage)}
-
                 </>
             )
         }
     }
 
     async function onSubmit(e) {
+
+
         try {
             const response = await axios.post(`http://localhost:8080/${postLink}`, {
                     createdDate: todaysDate,
@@ -68,7 +69,7 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                     firmness: e.firmnessForm,
                     linkToStore: e.linkToStoreForm,
                     linkToReview: e.linkToReviewForm,
-                    // image: e.imageForm[0],
+                    image: preloadedImage,
                     isAvailableInNL: e.isAvailableInNLForm === "true" ? true : false,
                     material: e.materialForm === "SILICONE" ? "0" : "1",
                     addedBy: username,
@@ -307,8 +308,7 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
 
 
                 {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
-                {console.log("test")}
-                {console.log(preloadedImage)}
+
 
                 <div className="radio-container">
                     <span className="label">Is in een Nederlandse (web)winkel te koop?</span>

@@ -84,9 +84,13 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                         }
                     });
                 setPendingDiscList(response.data.map((disc) => {
-                        return <li key={disc.id}><Link to={`/disk-accepteren/${disc.id}`}>{disc.brand}
-                            <strong> {disc.name}</strong> - {disc.model}</Link> ({disc.createdDate})
-                            <button className="delete-btn" onClick={() => deleteDisc(disc.id)}>Delete Pending Disk</button></li>
+                        return <li key={disc.id}>
+                            <Link to={`/disk-accepteren/${disc.id}`}>{disc.brand}
+                                <strong> {disc.name}</strong> - {disc.model}
+                            </Link>
+                            ({disc.createdDate})
+                            <button className="delete-btn" onClick={() => deleteDisc(disc.id)}>Delete Pending Disk</button>
+                        </li>
                     })
                 )
             } catch (error) {
@@ -123,8 +127,8 @@ function Profile({headerImageHandler, pageTitleHandler}) {
             {isBrand &&
                 <BookmarkBox verticalText="Merk">
                     <h2>Je eigen disk toevoegen?</h2>
-                    <p>Je bent bevoegd om een eigen disk toe te voegen. Dit kan <Link to="/disk-toevoegen">hier</Link>.</p>
-                    <button type="button" onClick="/disk-toevoegen">Eigen disk toevoegen</button>
+                    <p>Je bent bevoegd om een eigen disk toe te voegen.</p>
+                    <Link to="/disk-toevoegen" className="highlighter">Eigen disk toevoegen</Link>
                 </BookmarkBox>
             }
 
@@ -132,7 +136,8 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                 <BookmarkBox verticalText="admin">
                     <h2>{pendingDiscList && pendingDiscList.length} disks om goed te keuren</h2>
                     <p>Je bent admin, dus we gaan je hier alle pending discs tonen.</p>
-                    <p>Klik op de naam van de disk om hem te accepteren of wijzigen. Klik op de delete-button ernaast om hem te verwijderen.</p>
+                    <p>Klik op de naam van de disk om hem te accepteren of wijzigen. Klik op de delete-button ernaast om
+                        hem te verwijderen.</p>
                     <ul>{pendingDiscList && pendingDiscList}</ul>
                 </BookmarkBox>
             }

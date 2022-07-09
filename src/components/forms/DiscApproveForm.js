@@ -26,9 +26,7 @@ function DiscApproveForm({pendingDiscId}) {
                     console.log(response.data);
 
                     if (response.data.image) {
-                        console.log(response.data.image.url)
-                        console.log("image")
-                        setPendingDiscImage(response.data.image.url);
+                        setPendingDiscImage(response.data.image);
                         setDiscData({
                             createdDateForm: response.data.createdData,
                             nameForm: response.data.name,
