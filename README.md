@@ -63,7 +63,7 @@ Of gebruik de onderstaande informatie om de code manueel te clonen.
 - HTTPS: `https://github.com/Nynkek/menstruatieDisk-frontend.git`
 
 ### Code runnen
-####Dit project is opgezet met behulp van React
+#### Dit project is opgezet met behulp van React
 
 Om de applicatie vervolgens draaiende te krijgen is het als tweede stap belangrijk om [Node.js](https://nodejs.org/en/) en [NPM](https://www.npmjs.com/) te installeren. Daarna installeer je de NPM packages om de app te kunnen runnen. Dit doe je met de volgende commando’s:
 
