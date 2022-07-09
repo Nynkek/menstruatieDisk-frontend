@@ -1,4 +1,4 @@
-![Menstruatiedisk logo](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-logo-rood.png?raw=true)
+![Menstruatiedisk logo](https://github.com/Nynkek/menstruatieDisk-frontend/blob/main/src/assets/menstruatiedisk-screenshot-project.png?raw=true)
 
 
 # Menstruatiedisk app
