@@ -78,9 +78,6 @@ strong {
   font-weight: 600;
 }
 
-.footer-container a:hover:after{
-  content: " →";
-}
 
 /*-----------HEADER-----------*/
 

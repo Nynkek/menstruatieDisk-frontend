@@ -1,67 +1,112 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import "./form.css";
 import {AuthContext} from "../../context/AuthContext";
 import getTodaysDate from "../../helpers/getTodaysDate";
+import fileValidation from "../../helpers/FileValidation";
 
 
 function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
-    const {register, formState: {errors}, watch, handleSubmit} = useForm({defaultValues: preloadedValues});
+    const {
+        register,
+        formState,
+        formState: {errors, isSubmitSuccessful},
+        watch,
+        handleSubmit,
+        reset
+    } = useForm({defaultValues: preloadedValues});
     const {user: {username}} = useContext(AuthContext);
     const [addSuccess, toggleAddSuccess] = useState(false);
     const [error, setError] = useState(false);
     const todaysDate = getTodaysDate();
     const imageFormValue = watch("imageForm");
+    const token = localStorage.getItem('token');
+    const navigate = useNavigate();
 
+    function showPreview() {
+        console.log(preloadedImage);
+        if (imageFormValue && imageFormValue.length > 0) {
+            return (
+
+                <>
+                    <p><strong>Preview:</strong><br/>
+                        <img src={URL.createObjectURL(imageFormValue.item(0))}
+                             alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                             className="image-preview"/></p>
+                    {fileValidation(imageFormValue.item(0))}
+                </>
+            )
+        } else if (preloadedImage.url) {
+            return (
+                <>
+                    <p>Preview:<br/>
+                        <img src={preloadedImage.url}
+                             alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                             className="image-preview"/></p>
+                </>
+            )
+        }
+    }
 
     async function onSubmit(e) {
-        // Sla het gekozen bestand op
-        const formData = new FormData();
-        // Voeg daar ons bestand uit de state aan toe onder de key "file"
-        formData.append("image", e.imageForm[0]);
 
 
         try {
             const response = await axios.post(`http://localhost:8080/${postLink}`, {
-                createdDate: todaysDate,
-                name: e.nameForm,
-                brand: e.brandForm,
-                model: e.modelForm,
-                width: e.widthForm,
-                capacity: e.capacityForm,
-                rimWidth: e.rimWidthForm,
-                isReusable: e.isReusableForm === "true" ? true : false,
-                hasStem: e.hasStemForm === "true" ? true : false,
-                designFeature: e.designFeatureForm,
-                shape: e.shapeForm,
-                firmness: e.firmnessForm,
-                linkToStore: e.linkToStoreForm,
-                linkToReview: e.linkToReviewForm,
-                // image: e.imageForm[0],
-                isAvailableInNL: e.isAvailableInNLForm === "true" ? true : false,
-                material: e.materialForm === "SILICONE" ? "0" : "1",
-                addedBy: username,
-            });
-            console.log(response.data);
-            const discAddedId = response.data.id;
-
-            console.log("als het goed is is de disk verstuurd...");
-
-            const result = await axios.post(`http://localhost:8080/pendingdiscs/${discAddedId}/photo`, formData,
+                    createdDate: todaysDate,
+                    name: e.nameForm,
+                    brand: e.brandForm,
+                    model: e.modelForm,
+                    width: e.widthForm,
+                    capacity: e.capacityForm,
+                    rimWidth: e.rimWidthForm,
+                    isReusable: e.isReusableForm === "true" ? true : false,
+                    hasStem: e.hasStemForm === "true" ? true : false,
+                    designFeature: e.designFeatureForm,
+                    shape: e.shapeForm,
+                    firmness: e.firmnessForm,
+                    linkToStore: e.linkToStoreForm,
+                    linkToReview: e.linkToReviewForm,
+                    image: preloadedImage,
+                    isAvailableInNL: e.isAvailableInNLForm === "true" ? true : false,
+                    material: e.materialForm === "SILICONE" ? "0" : "1",
+                    addedBy: username,
+                },
                 {
                     headers: {
-                        "Content-Type": "multipart/form-data"
-                    },
-                })
-            console.log(result.data);
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                }
+            );
+            console.log(response.data);
+            const discAddedId = response.data.id;
+            const root = postLink.split('/')[0];
 
+            console.log("als het goed is is de disk verstuurd... nu nog de afbeelding");
+
+            if (e.imageForm[0]) {
+
+
+                const formData = new FormData();
+                formData.append("image", e.imageForm[0]);
+                console.log(e.imageForm[0]);
+
+                const result = await axios.post(`http://localhost:8080/${root}/${discAddedId}/photo`, formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                            "Authorization": `Bearer ${token}`
+                        },
+                    })
+                console.log(result.data);
+                console.log("als het goed is is de afbeelding ook verstuurd...");
+            }
             toggleAddSuccess(true);
             setError(false);
-            // HTMLFormElement.reset();
-
-
-            // navigate("/inloggen");
+            navigate('/profiel');
         } catch (error) {
             console.error('There was an error!', error);
             setError(true);
@@ -251,8 +296,6 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                 {errors.linkToReviewForm && <p className="error-label">{errors.linkToReviewForm.message}</p>}
 
 
-
-
                 <label htmlFor="details-image">Kies afbeelding
                     <input type="file" placeholder="Afbeelding"
                            id="details-image"
@@ -261,31 +304,10 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                            {...register("imageForm")}
                     />
                 </label>
+                {showPreview()}
 
 
-
-                {imageFormValue ?
-                    <>
-                    {imageFormValue.length > 0 &&
-
-                        <p>Preview:<br/>
-                        <img src={URL.createObjectURL(imageFormValue.item(0))} alt="Voorbeeld van de afbeelding die zojuist gekozen is"
-                             className="image-preview"/></p>
-
-                }</>
-                :<>
-                    {preloadedImage &&
-
-                        <p>Preview:<br/>
-                        <img src={preloadedImage}
-                             alt="Voorbeeld van de afbeelding die zojuist gekozen is"
-                             className="image-preview"/></p>
-
-                }
-                    </>
-                }
                 {errors.imageForm && <p className="error-label">{errors.imageForm.message}</p>}
-
 
 
                 <div className="radio-container">
