@@ -41,7 +41,6 @@ function AuthContextProvider({children}) {
     function logout(e) {
         localStorage.clear();
         e.preventDefault();
-        console.log("de gebruiker is uitgelogd");
         toggleAuth({
             isAuth: false,
             user: null,
@@ -52,15 +51,12 @@ function AuthContextProvider({children}) {
 
     async function getData(id, token, redirectUrl) {
         try {
-            console.log(token);
-            console.log(id);
             const response = await axios.get(`http://localhost:8080/users/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
                 }
             });
-            console.log(response.data);
             toggleAuth({
                 ...auth,
                 isAuth: true,

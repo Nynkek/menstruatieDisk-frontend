@@ -1,17 +1,11 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
-
 import pageImg
     from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
-import YellowContentBox from "../components/pageItems/pageDesignElements/yellowContentBox/YellowContentBox";
-import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
 import TwoColumnWithImg from "../components/pageItems/pageDesignElements/twoColumn/TwoColumnWithImg";
 import cupsOnRackImg
     from "../assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg";
-import TwoColumn from "../components/pageItems/pageDesignElements/twoColumn/TwoColumn";
-import Column from "../components/pageItems/pageDesignElements/twoColumn/Column";
-
 
 function Contact({headerImageHandler, pageTitleHandler}) {
 
@@ -30,7 +24,6 @@ function Contact({headerImageHandler, pageTitleHandler}) {
                 <p>We hebben ook een <a href="https://www.facebook.com/groups/menstruatiecupclub/" target="_blank">gezellige
                     Facebookgroep</a> waar je vragen kan stellen.</p>
             </TextContainer>
-
 
             <TwoColumnWithImg img={cupsOnRackImg} imgAlt="alt text" imgCaption="lees deze caption">
                 <h2>Onafhankelijk en genderneutraal</h2>

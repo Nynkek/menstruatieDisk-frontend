@@ -14,23 +14,15 @@ function SignUp({headerImageHandler, pageTitleHandler}) {
     const source = axios.CancelToken.source();
     let navigate = useNavigate();
 
-
     useEffect(() => {
         headerImageHandler(pageImg);
         pageTitleHandler("Registreren van een account");
     }, [headerImageHandler, pageTitleHandler]);
 
-    // useEffect(() => {
-    //     return function cleanup() {
-    //         source.cancel();
-    //     }
-    // }, []);
 
     const [users, setUsers] = useState([]);
 
     async function addUser(e) {
-
-        console.log(e.username, e.emailAdress, e.password);
         try {
             const response = await axios.post("http://localhost:8080/users/createUser/", {
                 username: e.username,
@@ -136,8 +128,6 @@ function SignUp({headerImageHandler, pageTitleHandler}) {
                     </button>
                 </form>
                 {error && "Er ging iets mis, probeer het later opnieuw."}
-
-
             </YellowContentBox>
 
         </>

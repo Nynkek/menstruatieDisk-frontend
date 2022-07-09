@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import pageImg
     from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4308-1000x400.jpg";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
-import TwoColumn5050 from "../components/pageItems/pageDesignElements/twoColumn/twoColumn50-50";
 import TwoColumn from "../components/pageItems/pageDesignElements/twoColumn/TwoColumn";
 import Column from "../components/pageItems/pageDesignElements/twoColumn/Column";
 import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
@@ -13,26 +11,6 @@ import cupsOnRackImg
 
 function HomePage({headerImageHandler, pageTitleHandler}) {
 
-    const [menstrualDisks, setMenstrualDisks] = useState([]);
-
-    useEffect(() => {
-        axios.get("http://localhost:8080")
-            .then((response) => {
-                setMenstrualDisks(response.data);
-                console.log(response.data);
-            }).catch(error => {
-            console.error('There was an error!', error);
-        });
-
-    }, []);
-
-    function showDisks(array) {
-        let newArray = array.map(({id, name, brand}) => {
-            return <li key={id}>{brand} {name}</li>;
-        });
-        return newArray;
-    }
-
     useEffect(() => {
         headerImageHandler(pageImg);
         pageTitleHandler("Menstruatiedisk informatie");
@@ -40,7 +18,6 @@ function HomePage({headerImageHandler, pageTitleHandler}) {
 
 
     return (
-
         <>
             <TextContainer>
                 <h2>Wat is een menstruatiedisk?</h2>
