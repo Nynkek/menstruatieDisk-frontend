@@ -5,7 +5,6 @@ import YellowContentBox from "../components/pageItems/pageDesignElements/yellowC
 import axios from "axios";
 import Tabel from "../components/tabel/Tabel";
 import TextContainer from "../components/pageItems/pageDesignElements/textContainer/TextContainer";
-import TwoColumn5050 from "../components/pageItems/pageDesignElements/twoColumn/twoColumn50-50";
 import BookmarkBox from "../components/pageItems/pageDesignElements/bookmarkBox/BookmarkBox";
 
 
@@ -16,7 +15,6 @@ function Compare({headerImageHandler, pageTitleHandler}) {
         axios.get("http://localhost:8080/discs/")
             .then((response) => {
                 setMenstrualDiscs(response.data);
-                console.log(response.data);
             }).catch(error => {
             console.error('There was an error!', error);
         });

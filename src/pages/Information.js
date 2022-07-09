@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
 import pageImg
     from "../../../menstruatiedisk-frontend/src/assets/Cupkiezer-Bamboozy-menstruatiedisk-en-cup-vergelijken-in-twee-maten-4367.jpg";
-import cupsOnRackImg
-    from "../../../menstruatiedisk-frontend/src/assets/20211217-16-42-27-Cupkiezer-verschillende-menstruatiecup-vergelijken-op-kruidenrek-1024x1024.jpg"
 import discs
     from "../../src/assets/Cupkiezer-menstruatiedisc-vergelijken-NIXIT-easecup-en-softdisc-20200413-13.jpg"
 import discs2
@@ -35,7 +33,6 @@ function Information({headerImageHandler, pageTitleHandler}) {
                     schuiner. De disc komt tussen de achterwand van de vagina en het schaambeen te liggen, daar bedekt
                     het de hele baarmoedermond. Je klemt hem achter je schaambeen, om hem op z’n plek te laten
                     zitten.</p>
-
                 <p>Eruit halen doe je door met je vinger achter de rand te klemmen. Dan trek je de menstruatiedisk
                     eruit. Je hoeft geen vacuüm te verbreken.</p>
             </TwoColumnWithImg>
@@ -45,7 +42,6 @@ function Information({headerImageHandler, pageTitleHandler}) {
                 <p>Menstruatiediscs verschillen in inhoud, van 30ml tot wel 76ml. </p>
                 <p>Al is het wel zo dat ze nooit helemaal gevuld kunnen worden omdat het zachte opvang-gedeelte altijd
                     wat wordt samen gevouwen wanneer je hem draagt.</p>
-
             </BookmarkBox>
             <TwoColumnWithImg img={discs2} imgAlt="Verschillende disks."
                               imgCaption="Verschillende disks">
@@ -53,8 +49,6 @@ function Information({headerImageHandler, pageTitleHandler}) {
                 <p>Menstruatiedisks zijn flexibele schijven en lijken meer op een pessarium.</p>
 
                 <p>Dat is heel persoonlijk.
-
-
                     Als je voor een duurzame variant wilt gaan, neem dan een herbruikbare menstruatiedisc. Daarna kun je
                     kiezen voor een hardere of zachtere variant. De meeste discs hebben maar 1 model/maat. Maar de Lumma
                     Unique is in verschillende maten (S, M en L) te krijgen. Dus ook qua diameter heb je een keuze.</p>

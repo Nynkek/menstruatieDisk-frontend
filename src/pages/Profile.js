@@ -34,7 +34,6 @@ function Profile({headerImageHandler, pageTitleHandler}) {
                     }
                 });
                 setUserData(response.data);
-                console.log(response.data.authorities);
                 response.data.authorities.map((userRole) => {
                     if (userRole.authority === "ROLE_ADMIN") {
                         return toggleIsAdmin(true);

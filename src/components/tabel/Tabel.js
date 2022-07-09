@@ -6,7 +6,6 @@ import "./tabel.css";
 function Tabel() {
     const [menstrualDiscs, setMenstrualDiscs] = useState([]);
     const [filteredDiscs, setFilteredDiscs] = useState([]);
-    const [filterText, setFilterText] = React.useState('');
     const [bmm, setBmm] = useState('');
     const [reusable, setReusable] = useState('');
     const [stem, setStem] = useState('');
@@ -24,9 +23,6 @@ function Tabel() {
             .then((response) => {
                 setMenstrualDiscs(response.data);
                 setFilteredDiscs(response.data)
-                console.log(menstrualDiscs.data);
-                console.log(response.data[0].image.fileName);
-
             }).catch(error => {
             console.error('There was an error!', error);
         });

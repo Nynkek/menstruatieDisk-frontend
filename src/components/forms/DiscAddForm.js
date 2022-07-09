@@ -80,16 +80,9 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
             );
             const discAddedId = response.data.id;
             const root = postLink.split('/')[0];
-
-            console.log("als het goed is is de disk verstuurd... nu nog de afbeelding");
-
             if (e.imageForm[0]) {
-
-
                 const formData = new FormData();
                 formData.append("image", e.imageForm[0]);
-                console.log(e.imageForm[0]);
-
                 const result = await axios.post(`http://localhost:8080/${root}/${discAddedId}/photo`, formData,
                     {
                         headers: {
@@ -97,8 +90,6 @@ function DiscAddForm({preloadedValues, postLink, preloadedImage}) {
                             "Authorization": `Bearer ${token}`
                         },
                     })
-                console.log(result.data);
-                console.log("als het goed is is de afbeelding ook verstuurd...");
             }
             toggleAddSuccess(true);
             setError(false);
